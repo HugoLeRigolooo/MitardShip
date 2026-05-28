@@ -1,17 +1,14 @@
 package entity;
 
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
 public abstract class ProjectilePlayer extends ProjectileBase{
 	Player m_p;
+
 	
-	
-	public ProjectilePlayer (GamePanel a_gp, Player p) {
-		super(a_gp);
+	public ProjectilePlayer (GamePanel a_gp, Player p, int degat,int speed) {
+		super(a_gp,degat,speed);
 		m_p=p;
 		this.setDefaultValues();
 		this.getProjectileImage();

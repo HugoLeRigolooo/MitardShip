@@ -11,9 +11,10 @@ public class Player extends Entity {
 
     GamePanel m_gp;
     KeyHandler m_keyH;
-	private ArrayList<ProjectilePlayer> m_projectiles;
+	ArrayList<ProjectilePlayer> m_projectiles;
 	private int m_cooldownTir; 
 	private int m_cadenceTir;
+	int m_vie;
 	
     BufferedImage m_idleImageVie;
 
@@ -29,7 +30,7 @@ public class Player extends Entity {
         m_x = m_gp.SCREEN_WIDTH / 2 - (m_gp.TILE_SIZE * 6) / 2;
         m_y = m_gp.SCREEN_HEIGHT - 100;
         m_speed = 4;
-        vie = 100;
+        m_vie = 100;
 		m_cooldownTir = 0;   
 		m_cadenceTir = 10;
 		
@@ -63,18 +64,18 @@ public class Player extends Entity {
     private void tirer(int mode) {
 		if(mode==0) {
 
-			ProjectilePlayer missile = new ProjectilePlayer1(m_gp, this);
+			ProjectilePlayer missile = new ProjectilePlayer1(m_gp, this,5,8);
 	
 			m_projectiles.add(missile);}
 		
 		else if (mode==1) {
 		
-			ProjectilePlayer mGauche = new ProjectilePlayer2(m_gp, this);
+			ProjectilePlayer mGauche = new ProjectilePlayer2(m_gp, this,5,8);
 			
 			mGauche.setX(this.m_x);
 			
 	
-			ProjectilePlayer mDroit = new ProjectilePlayer2(m_gp, this);
+			ProjectilePlayer mDroit = new ProjectilePlayer2(m_gp, this,5,8);
 			mDroit.setX(this.m_x + 60);
 			
 			m_projectiles.add(mGauche);
@@ -82,18 +83,19 @@ public class Player extends Entity {
 		
 		else {
 			
-			ProjectilePlayer mGauche = new ProjectilePlayer3(m_gp, this,1);
+			ProjectilePlayer mGauche = new ProjectilePlayer3(m_gp, this,1,5,8);
 			mGauche.setX(this.m_x + 20);
 			
-			ProjectilePlayer mMilieu = new ProjectilePlayer3(m_gp, this,0); 
+			ProjectilePlayer mMilieu = new ProjectilePlayer3(m_gp, this,0,5,8); 
 			
-			ProjectilePlayer mDroit = new ProjectilePlayer3(m_gp, this,2);
+			ProjectilePlayer mDroit = new ProjectilePlayer3(m_gp, this,2,5,8);
 			mDroit.setX(this.m_x + 35);
 			
 			m_projectiles.add(mGauche);
 			m_projectiles.add(mMilieu);
 			m_projectiles.add(mDroit);}
 		}
+    public ArrayList<ProjectilePlayer> getProjectiles(){return m_projectiles;}
 
     public void update() {
         if (m_keyH.upPressed) m_y -= m_speed;
@@ -149,14 +151,19 @@ public class Player extends Entity {
 			}
 		}
     }
-	int getX() {
+	public int getX() {
 		return m_x;
 	}
 
-	int getY() {
+	public int getY() {
 		return m_y;
 	}
-	
+	public int getVie() {
+		return m_vie;
+	}
+	public void setVie(int degat) {
+		m_vie-=degat;
+	}
 
     public void draw(Graphics2D a_g2) {
     	for (int i = 0; i < m_projectiles.size(); i++) {

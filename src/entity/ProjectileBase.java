@@ -12,6 +12,8 @@ import main.GamePanel;
 public abstract class ProjectileBase extends Entity{
 	int m_degat;
 	GamePanel m_gp;
+	int m_speed;
+	
 	boolean en_collision; //si le projectile a une collision se met sur true donc le projectile ne s'affiche plus
 
 
@@ -22,10 +24,12 @@ public abstract class ProjectileBase extends Entity{
 	 * @param e Entity, tireur du projectile
 	 
 	 */
-	public ProjectileBase(GamePanel a_gp) {
+	public ProjectileBase(GamePanel a_gp, int degat, int speed) {
 		this.m_gp = a_gp;
+		m_degat=degat;
+		m_speed=speed;
 
-		en_collision = false;
+
 	}
 	
 	
@@ -36,21 +40,15 @@ public abstract class ProjectileBase extends Entity{
 	 */
 	public abstract void getProjectileImage();
 	
-	public void collision() {
-		if(false) {
-		en_collision = true;}
-	}
 	
 	public int getDegat() {return m_degat;}
 	
 	public abstract void update();
 
 	public void draw(Graphics2D a_g2) {
-		if(en_collision==false) {
-
 			BufferedImage l_image = m_idleImage;
 			a_g2.drawImage(l_image, m_x, m_y, m_gp.TILE_SIZE, m_gp.TILE_SIZE, null);}
-		}
+
 	
 	
 	

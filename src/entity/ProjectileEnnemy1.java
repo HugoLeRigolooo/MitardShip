@@ -7,14 +7,14 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 
 public class ProjectileEnnemy1 extends ProjectileEnnemy {
-	public ProjectileEnnemy1 (GamePanel a_gp, Ennemy e) {
-		super(a_gp,e);
+	
+	public ProjectileEnnemy1 (GamePanel a_gp, Ennemy e, int degat , int speed) {
+		super(a_gp,e,degat,speed);
 	}
 	protected void setDefaultValues() {
 		m_x = m_e.getX()+10;
 		m_y = m_e.getY()+10;
-		m_speed = 8;
-		m_degat=20;
+
 	}
 	
 	
@@ -25,7 +25,7 @@ public class ProjectileEnnemy1 extends ProjectileEnnemy {
 			e.printStackTrace();
 		}
 	}
-
+	public int getDegat() {return m_degat;}
 	public void update() {
 		m_y+=m_speed;
 	}

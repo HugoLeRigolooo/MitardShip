@@ -19,7 +19,7 @@ public class Ennemy extends Entity {
 	KeyHandler m_keyH;
 	int m_init_x;
 	int m_init_y;
-	static List<Ennemy> listEnnemy = new ArrayList<Ennemy>();
+	public static List<Ennemy> listEnnemy = new ArrayList<Ennemy>();
 	int m_vie;
 	ArrayList<ProjectileEnnemy> m_projectiles;
 	
@@ -56,11 +56,11 @@ public class Ennemy extends Entity {
 		this.m_projectiles = new ArrayList<>();
 	}
 	
-	int getVie() {
+	public int getVie() {
 		return m_vie;
 	}
 	
-	void substractVie(int vie) {
+	public void substractVie(int vie) {
 		m_vie -= vie;
 	}
 	
@@ -94,13 +94,16 @@ public class Ennemy extends Entity {
 		
 		
 	}
-	int getX() {
+	public int getX() {
 		return m_x;
 	}
 
-	int getY() {
+	public int getY() {
 		return m_y;
 	}
+	  public ArrayList<ProjectileEnnemy> getProjectiles(){return m_projectiles;}
+	
+
 	
 	
 	/**

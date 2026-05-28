@@ -31,7 +31,7 @@ public class EnnemyBase extends Ennemy {
 	}
 	
 	private void tirer() {
-		ProjectileEnnemy missile = new ProjectileEnnemy1(m_gp, this);
+		ProjectileEnnemy missile = new ProjectileEnnemy1(m_gp, this,25,8);
 		m_projectiles.add(missile);}
 	
 	public void update() {
