@@ -22,8 +22,8 @@ public class EnnemyCircularVertical extends Ennemy {
 	 * @param a_keyH KeyHandler, gestionnaire des touches 
 	 */
 	
-	public EnnemyCircularVertical(GamePanel a_gp, int x, int y, int speed) {
-		super(a_gp,x,y,speed);
+	public EnnemyCircularVertical(GamePanel a_gp, int x, int y, int speed, int typeTir, int cadenceTir) {
+		super(a_gp,x,y,speed,typeTir, cadenceTir);
 		m_angle=0;
 		m_radius= 20;
 		this.getEnnemyImage();
@@ -31,8 +31,8 @@ public class EnnemyCircularVertical extends Ennemy {
 		vie = 20;
 	}
 	
-	public EnnemyCircularVertical(GamePanel a_gp, int x, int y, int speed, int radius) {
-		super(a_gp,x,y,speed);
+	public EnnemyCircularVertical(GamePanel a_gp, int x, int y, int speed, int radius, int typeTir, int cadenceTir) {
+		super(a_gp,x,y,speed,typeTir, cadenceTir);
 		m_angle=0;
 		m_radius=radius;
 		this.getEnnemyImage();
@@ -40,7 +40,7 @@ public class EnnemyCircularVertical extends Ennemy {
 		vie = 20;
 	}
 	
-	public void update() {
+	public void update_move() {
 		m_init_y += m_speed; 
 	    
 	    m_angle += 0.1; 

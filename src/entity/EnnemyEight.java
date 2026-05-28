@@ -22,8 +22,8 @@ public class EnnemyEight extends Ennemy {
 	 * @param a_keyH KeyHandler, gestionnaire des touches 
 	 */
 	
-	public EnnemyEight(GamePanel a_gp, int x, int y, int speed, int amp) { // mettre m_speed à 1 pour un comportement classique
-		super(a_gp, x, y, speed);
+	public EnnemyEight(GamePanel a_gp, int x, int y, int speed, int amp, int typeTir, int cadenceTir) { // mettre m_speed à 1 pour un comportement classique
+		super(a_gp, x, y, speed,typeTir);
 		m_amp=amp;
 		this.getEnnemyImage();
 		m_timer=0;
@@ -31,8 +31,8 @@ public class EnnemyEight extends Ennemy {
 		vie = 20;
 	}
 	
-	public EnnemyEight(GamePanel a_gp, int x, int y, int speed) {
-		super(a_gp, x, y, speed);
+	public EnnemyEight(GamePanel a_gp, int x, int y, int speed, int typeTir, int cadenceTir) {
+		super(a_gp, x, y, speed,typeTir);
 		m_amp=50;
 		this.getEnnemyImage();
 		m_timer=0;
@@ -40,8 +40,8 @@ public class EnnemyEight extends Ennemy {
 		vie = 20;
 	}
 	
-	public EnnemyEight(GamePanel a_gp) {
-		super(a_gp);
+	public EnnemyEight(GamePanel a_gp, int typeTir, int cadenceTir) {
+		super(a_gp,typeTir, cadenceTir);
 		m_amp=50;
 		this.getEnnemyImage();
 		m_timer=0;
@@ -49,7 +49,7 @@ public class EnnemyEight extends Ennemy {
 		vie = 20;
 	}
 	
-	public void update() {
+	public void update_move() {
 	    m_timer += 0.02;
 	    m_x = (int) (m_init_x + 3* m_amp * Math.sin(m_speed * m_timer));
 	    m_y = (int) (m_init_y + m_amp * Math.sin(m_speed * m_timer * 2));

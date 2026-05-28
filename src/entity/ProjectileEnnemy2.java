@@ -7,15 +7,14 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 
 public class ProjectileEnnemy2 extends ProjectileEnnemy{
+	public ProjectileEnnemy2 (GamePanel a_gp, Ennemy e, int degat, int speed) {
+		super(a_gp,e, degat, speed);
+	}
+	
 	public ProjectileEnnemy2 (GamePanel a_gp, Ennemy e) {
-		super(a_gp,e);
+		super(a_gp,e, 10, 4);
 	}
-	protected void setDefaultValues() {
-		//m_x = m_e.getX()+10;
-		//m_y = m_e.getY()+10;
-		m_speed = 8;
-		m_degat=20;
-	}
+	
 	
 	
 	public void getProjectileImage() {

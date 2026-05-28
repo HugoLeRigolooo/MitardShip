@@ -38,7 +38,6 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler m_keyH;
 	Thread m_gameThread;
 	Player m_player;
-	Ennemy m_e;
 	TileManager m_tileM;
 	GameOver m_gameover;
 	
@@ -60,7 +59,6 @@ public class GamePanel extends JPanel implements Runnable{
 		m_FPS = 60;				
 		m_keyH = new KeyHandler(this);
 		m_player = new Player(this, m_keyH);
-		m_e = new EnnemyBase(this,300,180);
 		m_tileM = new TileManager(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
 		m_gameState=playState; //temporaire mais faut commencer par start
@@ -149,7 +147,6 @@ public class GamePanel extends JPanel implements Runnable{
 			m_tileM.draw(g2);
 			m_player.draw(g2);
 			drawProgression(g2);
-			m_e.draw(g2);
 
 			g2.setColor(Color.WHITE);
 			g2.drawString("Score: " + score, 50, 50);

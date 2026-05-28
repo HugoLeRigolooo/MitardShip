@@ -22,21 +22,21 @@ public class EnnemyVertical extends Ennemy {
 	 * @param a_keyH KeyHandler, gestionnaire des touches 
 	 */
 	
-	public EnnemyVertical(GamePanel a_gp, int x, int y) {
-		super(a_gp, x,y,2);
+	public EnnemyVertical(GamePanel a_gp, int x, int y,int typeTir, int cadenceTir) {
+		super(a_gp, x,y,2,typeTir, cadenceTir);
 		this.getEnnemyImage();
 		scoreValue = 10;
 		vie = 20;
 	}
 	
-	public EnnemyVertical(GamePanel a_gp, int x, int y, int speed) {
-		super(a_gp, x ,y, speed);
+	public EnnemyVertical(GamePanel a_gp, int x, int y, int speed,int typeTir, int cadenceTir) {
+		super(a_gp, x ,y, speed,typeTir ,cadenceTir );
 		this.getEnnemyImage();
 		scoreValue = 10;
 		vie = 20;
 	}
 	
-	public void update() {
+	public void update_move() {
 		double dx = m_target_x-m_init_x;
 		double dy = m_target_y-m_init_y;
 		double distance = Math.sqrt(dx * dx + dy * dy);
@@ -44,4 +44,5 @@ public class EnnemyVertical extends Ennemy {
 		m_x += m_speed * (dx/distance);
 		
 	}
+	
 }
