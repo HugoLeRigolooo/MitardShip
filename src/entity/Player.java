@@ -14,7 +14,6 @@ public class Player extends Entity {
 	ArrayList<ProjectilePlayer> m_projectiles;
 	private int m_cooldownTir; 
 	private int m_cadenceTir;
-	int m_vie;
 	
     BufferedImage m_idleImageVie;
 
@@ -30,7 +29,7 @@ public class Player extends Entity {
         m_x = m_gp.SCREEN_WIDTH / 2 - (m_gp.TILE_SIZE * 6) / 2;
         m_y = m_gp.SCREEN_HEIGHT - 100;
         m_speed = 4;
-        m_vie = 100;
+        vie = 100;
 		m_cooldownTir = 0;   
 		m_cadenceTir = 10;
 		
@@ -158,10 +157,10 @@ public class Player extends Entity {
 		return m_y;
 	}
 	public int getVie() {
-		return m_vie;
+		return vie;
 	}
 	public void setVie(int degat) {
-		m_vie-=degat;
+		vie-=degat;
 	}
 
     public void draw(Graphics2D a_g2) {
@@ -174,5 +173,12 @@ public class Player extends Entity {
         }
     }
 	
+	int getX() {
+		return m_x;
+	}
 
+	int getY() {
+		return m_y;
+	}
+	
 }
