@@ -1,5 +1,5 @@
 package entity;
-
+import java.util.ArrayList;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -11,7 +11,10 @@ public class Player extends Entity {
 
     GamePanel m_gp;
     KeyHandler m_keyH;
-    public ProjectilePlayer projectile_actuel;
+	private ArrayList<ProjectilePlayer> m_projectiles;
+	private int m_cooldownTir; 
+	private int m_cadenceTir;
+	
     BufferedImage m_idleImageVie;
 
     public Player(GamePanel a_gp, KeyHandler a_keyH) {
@@ -19,6 +22,7 @@ public class Player extends Entity {
         this.m_keyH = a_keyH;
         setDefaultValues();
         getPlayerImage();
+		this.m_projectiles = new ArrayList<>();
     }
 
     protected void setDefaultValues() {
@@ -26,8 +30,11 @@ public class Player extends Entity {
         m_y = m_gp.SCREEN_HEIGHT - 100;
         m_speed = 4;
         vie = 100;
+		m_cooldownTir = 0;   
+		m_cadenceTir = 10;
+		
         
-        projectile_actuel = new ProjectilePlayer1(m_gp, this);
+
         getVieImage();
     }
 
@@ -53,6 +60,43 @@ public class Player extends Entity {
             e.printStackTrace();
         }
     }
+    private void tirer(int mode) {
+		if(mode==0) {
+
+			ProjectilePlayer missile = new ProjectilePlayer1(m_gp, this);
+	
+			m_projectiles.add(missile);}
+		
+		else if (mode==1) {
+		
+			ProjectilePlayer mGauche = new ProjectilePlayer2(m_gp, this);
+			
+			mGauche.setX(this.m_x - 30);
+			
+	
+			ProjectilePlayer mDroit = new ProjectilePlayer2(m_gp, this);
+			mDroit.setX(this.m_x + 30);
+			
+			m_projectiles.add(mGauche);
+			m_projectiles.add(mDroit);}
+		
+		else {
+			
+			ProjectilePlayer mGauche = new ProjectilePlayer3(m_gp, this,1);
+			mGauche.setX(this.m_x - 35);
+			
+			ProjectilePlayer mMilieu = new ProjectilePlayer3(m_gp, this,0); 
+			
+			ProjectilePlayer mDroit = new ProjectilePlayer3(m_gp, this,2);
+			mDroit.setX(this.m_x + 35);
+			
+			m_projectiles.add(mGauche);
+			m_projectiles.add(mMilieu);
+			m_projectiles.add(mDroit);}
+			
+			
+			
+		}
 
     public void update() {
         if (m_keyH.upPressed) m_y -= m_speed;
@@ -88,9 +132,31 @@ public class Player extends Entity {
             m_gp.m_gameState = m_gp.gameOverState;
         }
         getVieImage();
+        
+        if (m_cooldownTir > 0) {
+			m_cooldownTir--; 
+		}
+		
+		if (m_keyH.spacePressed && m_cooldownTir == 0) {
+			tirer(2);
+			m_cooldownTir = m_cadenceTir; 
+		}
+		
+		for (int i = m_projectiles.size() - 1; i >= 0; i--) {
+			ProjectilePlayer p = m_projectiles.get(i);
+			p.update();
+			
+
+			if (p.getY() < -m_gp.TILE_SIZE) {
+				m_projectiles.remove(i);
+			}
+		}
     }
 
     public void draw(Graphics2D a_g2) {
+    	for (int i = 0; i < m_projectiles.size(); i++) {
+			m_projectiles.get(i).draw(a_g2);
+		}
         a_g2.drawImage(m_idleImage, m_x, m_y, m_gp.TILE_SIZE * 6, m_gp.TILE_SIZE * 6, null);
         if (m_idleImageVie != null) {
             a_g2.drawImage(m_idleImageVie, 10, 10, m_gp.TILE_SIZE * 9, m_gp.TILE_SIZE * 3, null);

@@ -26,5 +26,9 @@ public class ProjectilePlayer1 extends ProjectilePlayer{
 			e.printStackTrace();
 		}
 	}
+	public void update() {
+		m_y-=m_speed;
+	}
+	
 
 }

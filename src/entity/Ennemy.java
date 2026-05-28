@@ -21,6 +21,7 @@ public class Ennemy extends Entity {
 	int m_init_y;
 	static List<Ennemy> listEnnemy = new ArrayList<Ennemy>();
 	int m_vie;
+	ArrayList<ProjectileEnnemy> m_projectiles;
 	
 	/**
 	 * Constructeur de Player
@@ -32,6 +33,7 @@ public class Ennemy extends Entity {
 		this.setDefaultValues();
 		this.getEnnemyImage();
 		listEnnemy.add(this);
+		this.m_projectiles = new ArrayList<>();
 	}
 	
 	public Ennemy(GamePanel a_gp, int x, int y) {
@@ -94,6 +96,9 @@ public class Ennemy extends Entity {
 	 * @param a_g2 Graphics2D 
 	 */
 	public void draw(Graphics2D a_g2) {
+		for (int i = 0; i < m_projectiles.size(); i++) {
+			m_projectiles.get(i).draw(a_g2);
+		}
 		// r�cup�re l'image du joueur
 		BufferedImage l_image = m_idleImage;
 		// affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)

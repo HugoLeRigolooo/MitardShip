@@ -15,6 +15,8 @@ public class EnnemyBase extends Ennemy {
 
 	int m_target_x;
 	int m_target_y;
+	int m_cooldownTir; 
+	int m_cadenceTir;
 	/**
 	 * Constructeur de Player
 	 * @param a_gp GamePanel, pannel principal du jeu
@@ -28,7 +30,13 @@ public class EnnemyBase extends Ennemy {
 		this.getEnnemyImage();
 		m_target_x = r.nextInt(m_gp.SCREEN_WIDTH+1);
 		m_target_y = y_target;
+		m_cooldownTir = 0;   
+		m_cadenceTir = 25;
 	}
+	
+	private void tirer() {
+		ProjectileEnnemy missile = new ProjectileEnnemy1(m_gp, this);
+		m_projectiles.add(missile);}
 	
 	public void update() {
 		double dx = m_target_x-m_init_x;
@@ -36,6 +44,14 @@ public class EnnemyBase extends Ennemy {
 		double distance = Math.sqrt(dx * dx + dy * dy);
 		m_y += m_speed * (dy/distance);			
 		m_x += m_speed * (dx/distance);
+		 if (m_cooldownTir > 0) {
+				m_cooldownTir--; 
+			}
+			
+		if (m_cooldownTir == 0) {
+				tirer();
+				m_cooldownTir = m_cadenceTir; 
+			}
 		
 	}
 }
