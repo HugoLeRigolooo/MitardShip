@@ -14,7 +14,7 @@ public class ProjectilePlayer3 extends ProjectilePlayer{
 		m_pos=pos;
 	}
 	protected void setDefaultValues() {
-		m_x = m_p.getX()+10;
+		m_x = m_p.getX() + m_gp.TILE_SIZE * 6/2 - m_gp.TILE_SIZE / 2;
 		m_y = m_p.getY()+10;
 		m_speed = 8;
 		m_degat=20;

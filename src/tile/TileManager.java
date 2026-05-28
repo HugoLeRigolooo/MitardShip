@@ -66,6 +66,13 @@ public class TileManager {
 			e.printStackTrace();
 		}
 	}
+
+	public int getTileNum(int col, int row) {
+    if (col >= 0 && col < m_gp.MAX_WORLD_COL && row >= 0 && row < m_gp.MAX_WORLD_ROW) {
+        return m_mapTileNum[col][row];
+    }
+    return 0;
+}
 	
 	/**
 	 * Lecture du fichier txt contenant la map et chargement des tuiles correspondantes.
