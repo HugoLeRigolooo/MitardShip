@@ -21,10 +21,7 @@ public abstract class ProjectilePlayer extends ProjectileBase{
 	
 	public abstract void getProjectileImage();
 	
-	public void update() {
-		m_y+=m_speed;
-	}
-	
+	public abstract void update();
 	
 	
 	
