@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread m_gameThread;
 	Player m_player;
 	TileManager m_tileM;
+	public Menu m_menu;
 	
 	public int m_position; //position de la caméra
 	
@@ -52,11 +53,12 @@ public class GamePanel extends JPanel implements Runnable{
 	 */
 	public GamePanel() {
 		m_FPS = 60;				
-		m_keyH = new KeyHandler();
+		m_keyH = new KeyHandler(this);
 		m_player = new Player(this, m_keyH);
 		m_tileM = new TileManager(this);
+		m_menu = new Menu(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
-		m_gameState=playState; //temporaire mais faut commencer par start
+		m_gameState=startState; //temporaire mais faut commencer par start
 		
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
@@ -110,7 +112,9 @@ public class GamePanel extends JPanel implements Runnable{
 	 * Mise � jour des donn�es des entit�s
 	 */
 	public void update() {
-		m_player.update();
+		if (m_gameState == playState) {
+	        m_player.update();
+	    }
 	}
 	
 	/**
@@ -118,12 +122,15 @@ public class GamePanel extends JPanel implements Runnable{
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		if (m_gameState==playState){
-			m_tileM.draw(g2);
-			m_player.draw(g2);
-		}
-		g2.dispose();
+	    Graphics2D g2 = (Graphics2D) g;
+	    if (m_gameState == startState) {
+	        m_menu.draw(g2);
+	    } else if (m_gameState == playState) {
+	        m_tileM.draw(g2);
+	        m_player.draw(g2);
+	    }
+
+	    g2.dispose();
 	}
 	
 }

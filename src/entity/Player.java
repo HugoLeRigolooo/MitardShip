@@ -68,26 +68,16 @@ public class Player extends Entity {
         getVieImage();
     }
 
+    /**
+	 * Affichage du l'image du joueur dans la fenetre du jeu
+	 * @param a_g2 Graphics2D 
+	 */
     public void draw(Graphics2D a_g2) {
         a_g2.drawImage(m_idleImage, m_x, m_y, m_gp.TILE_SIZE * 6, m_gp.TILE_SIZE * 6, null);
         if (m_idleImageVie != null) {
             a_g2.drawImage(m_idleImageVie, 10, 10, m_gp.TILE_SIZE * 9, m_gp.TILE_SIZE * 3, null);
         }
     }
-		}
-
-    }
-	
-	/**
-	 * Affichage du l'image du joueur dans la fenetre du jeu
-	 * @param a_g2 Graphics2D 
-	 */
-	public void draw(Graphics2D a_g2) {
-		// r�cup�re l'image du joueur
-		BufferedImage l_image = m_idleImage;
-		// affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
-		a_g2.drawImage(l_image, m_x, m_y, m_gp.TILE_SIZE*6, m_gp.TILE_SIZE*6, null);
-	}
 	
 	int getX() {
 		return m_x;
