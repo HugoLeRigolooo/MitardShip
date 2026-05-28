@@ -94,6 +94,14 @@ public class Ennemy extends Entity {
 		
 		
 	}
+	int getX() {
+		return m_x;
+	}
+
+	int getY() {
+		return m_y;
+	}
+	
 	
 	/**
 	 * Affichage du l'image du joueur dans la fen�tre du jeu

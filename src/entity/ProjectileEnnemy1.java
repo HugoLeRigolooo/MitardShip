@@ -20,7 +20,7 @@ public class ProjectileEnnemy1 extends ProjectileEnnemy {
 	
 	public void getProjectileImage() {
 		try {
-			m_idleImage = ImageIO.read(getClass().getResource("/projectiles/projectilePlayer1.png"));
+			m_idleImage = ImageIO.read(getClass().getResource("/projectiles/projectileEnnemy1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
