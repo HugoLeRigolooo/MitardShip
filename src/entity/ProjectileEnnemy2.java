@@ -24,6 +24,7 @@ public class ProjectileEnnemy2 extends ProjectileEnnemy{
 			e.printStackTrace();
 		}
 	}
+	public int getDegat() {return m_degat;}
 
 	public void update() {
 		m_y+=m_speed;

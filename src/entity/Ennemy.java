@@ -19,7 +19,7 @@ public abstract class Ennemy extends Entity {
 	KeyHandler m_keyH;
 	int m_init_x;
 	int m_init_y;
-	static List<Ennemy> listEnnemy = new ArrayList<Ennemy>();
+	public static List<Ennemy> listEnnemy = new ArrayList<Ennemy>();
 	int m_vie;
 	ArrayList<ProjectileEnnemy> m_projectiles;
 	int m_cooldownTir; 
@@ -67,11 +67,11 @@ public abstract class Ennemy extends Entity {
 		this.m_projectiles = new ArrayList<>();
 	}
 	
-	int getVie() {
+	public int getVie() {
 		return m_vie;
 	}
 	
-	void substractVie(int vie) {
+	public void substractVie(int vie) {
 		m_vie -= vie;
 	}
 	
@@ -118,13 +118,16 @@ public abstract class Ennemy extends Entity {
 			projectile.update();
 		}
 	}
-	int getX() {
+	public int getX() {
 		return m_x;
 	}
 
-	int getY() {
+	public int getY() {
 		return m_y;
 	}
+	  public ArrayList<ProjectileEnnemy> getProjectiles(){return m_projectiles;}
+	
+
 	
 	
 	public void tirer() {
