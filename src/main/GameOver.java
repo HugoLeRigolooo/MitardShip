@@ -1,6 +1,9 @@
 package main;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Color;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import entity.Ennemy;
@@ -11,20 +14,39 @@ import tile.TileManager;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class GameOver {
     GamePanel gp;
     public int commandNum = 0;
     KeyHandler m_keyH;
+    Font pixelFont;
 
     public GameOver(GamePanel gp, KeyHandler a_keyH) {
         this.gp = gp;
         this.m_keyH = a_keyH;
+//        try {
+//            InputStream is = getClass().getResourceAsStream("/font/04B_30__.ttf");
+//            if (is == null) {
+//                throw new IOException("Fichier introuvable !");
+//            }
+//            // createFont ne définit pas la taille, on ajoute deriveFont derrière
+//            pixelFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
+//            is.close(); // Important de fermer le flux après lecture
+//        } catch (FontFormatException | IOException e) {
+//            System.out.println("Erreur chargement police : " + e.getMessage());
+//            // Solution de secours (Fallback) pour que le jeu ne crash pas
+//            pixelFont = new Font("Arial", Font.BOLD, 30);
+//        }
     }
     
     public void draw(Graphics2D g2) {
         g2.setColor(new Color(0, 0, 0, 150));
         g2.fillRect(0, 0, gp.SCREEN_WIDTH, gp.SCREEN_HEIGHT);
-
+        //g2.setFont(pixelFont.deriveFont(Font.BOLD, 50F));
         String text = "MISSION TERMINÉE";
         g2.setColor(Color.WHITE);
         

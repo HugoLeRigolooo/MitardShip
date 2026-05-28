@@ -127,6 +127,7 @@ public class Player extends Entity {
             tileBottomRight == 7 || tileBottomRight == 8) {
             
             m_gp.m_gameState = m_gp.gameOverState;
+            setDefaultValues();
         }
         getVieImage();
         
