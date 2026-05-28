@@ -13,4 +13,12 @@ public abstract class Entity {
 	public boolean m_collision_ennemi;		//Indique si l'entit� est en collision avec une autre entit�
 	public boolean m_collision_projectile;	//Indique si l'entit� est en collision avec un projectile
 	public int vie;						//Vie de l'entit�
+	int getX() {
+		return m_x;
+	}
+
+	int getY() {
+		return m_y;
+	}
+	
 }

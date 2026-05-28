@@ -42,6 +42,8 @@ public class Ennemy extends Entity {
 		m_y=m_init_y=y;
 		m_speed = 2;
 		this.getEnnemyImage();
+		listEnnemy.add(this);
+		this.m_projectiles = new ArrayList<>();
 	}
 	
 	public Ennemy(GamePanel a_gp, int x, int y, int speed) {
@@ -50,6 +52,8 @@ public class Ennemy extends Entity {
 		m_y = m_init_y =  y;
 		m_speed = speed;
 		this.getEnnemyImage();
+		listEnnemy.add(this);
+		this.m_projectiles = new ArrayList<>();
 	}
 	
 	int getVie() {
@@ -81,7 +85,7 @@ public class Ennemy extends Entity {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Mise � jour des donn�es du joueur
 	 */

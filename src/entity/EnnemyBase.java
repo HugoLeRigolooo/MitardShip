@@ -1,13 +1,9 @@
 package entity;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 
 import main.GamePanel;
-import main.KeyHandler;
+
 
 import java.util.Random;
 
@@ -44,7 +40,7 @@ public class EnnemyBase extends Ennemy {
 		double distance = Math.sqrt(dx * dx + dy * dy);
 		m_y += m_speed * (dy/distance);			
 		m_x += m_speed * (dx/distance);
-		 if (m_cooldownTir > 0) {
+		if (m_cooldownTir > 0) {
 				m_cooldownTir--; 
 			}
 			
@@ -52,6 +48,15 @@ public class EnnemyBase extends Ennemy {
 				tirer();
 				m_cooldownTir = m_cadenceTir; 
 			}
+		for (int i = m_projectiles.size() - 1; i >= 0; i--) {
+			ProjectileEnnemy p = m_projectiles.get(i);
+			p.update();
+			
+
+			if (p.getY() < -m_gp.TILE_SIZE) {
+				m_projectiles.remove(i);
+			}
+		}
 		
 	}
 }
