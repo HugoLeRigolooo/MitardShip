@@ -72,6 +72,10 @@ public class GamePanel extends JPanel implements Runnable{
 		m_gameThread = new Thread(this);
 		m_gameThread.start();
 	}
+
+	public TileManager getTileManager() {
+		return m_tileM;
+	}
 	
 	public void run() {
 		
@@ -99,7 +103,6 @@ public class GamePanel extends JPanel implements Runnable{
 				nextDrawTime += drawInterval;
 				
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

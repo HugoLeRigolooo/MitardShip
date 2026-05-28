@@ -65,6 +65,28 @@ public class Player extends Entity {
         if (m_x > m_gp.SCREEN_WIDTH - m_gp.TILE_SIZE * 6) m_x = m_gp.SCREEN_WIDTH - m_gp.TILE_SIZE * 6;
         if (m_y > m_gp.SCREEN_HEIGHT - m_gp.TILE_SIZE * 6) m_y = m_gp.SCREEN_HEIGHT - m_gp.TILE_SIZE * 6;
 
+        int leftX = m_x;
+        int rightX = m_x + (m_gp.TILE_SIZE * 6) - 1; 
+        int topY = m_y;
+        int bottomY = m_y + (m_gp.TILE_SIZE * 6) - 1;
+
+        int leftCol = leftX / m_gp.TILE_SIZE;
+        int rightCol = rightX / m_gp.TILE_SIZE;
+        int topRow = (topY - m_gp.m_position) / m_gp.TILE_SIZE;
+        int bottomRow = (bottomY - m_gp.m_position) / m_gp.TILE_SIZE;
+
+        int tileTopLeft = m_gp.getTileManager().getTileNum(leftCol, topRow);
+        int tileTopRight = m_gp.getTileManager().getTileNum(rightCol, topRow);
+        int tileBottomLeft = m_gp.getTileManager().getTileNum(leftCol, bottomRow);
+        int tileBottomRight = m_gp.getTileManager().getTileNum(rightCol, bottomRow);
+
+        if (tileTopLeft == 7 || tileTopLeft == 8 ||
+            tileTopRight == 7 || tileTopRight == 8 ||
+            tileBottomLeft == 7 || tileBottomLeft == 8 ||
+            tileBottomRight == 7 || tileBottomRight == 8) {
+            
+            m_gp.m_gameState = m_gp.gameOverState;
+        }
         getVieImage();
     }
 
@@ -74,7 +96,6 @@ public class Player extends Entity {
             a_g2.drawImage(m_idleImageVie, 10, 10, m_gp.TILE_SIZE * 9, m_gp.TILE_SIZE * 3, null);
         }
     }
-
 	
 	int getX() {
 		return m_x;
