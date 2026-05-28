@@ -20,10 +20,7 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) downPressed = true;
         if (code == KeyEvent.VK_Q || code == KeyEvent.VK_LEFT) leftPressed = true;
         if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) rightPressed = true;
-        if (code == KeyEvent.VK_SPACE) {
-			System.out.println("Lance le projectile");
-			spacePressed = true;
-		}
+        if (code == KeyEvent.VK_SPACE) spacePressed = true;
     }
 
     @Override
