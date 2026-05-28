@@ -165,6 +165,7 @@ public class GamePanel extends JPanel implements Runnable{
 	   
 	    for (Ennemy ennemy : Ennemy.listEnnemy) {
 	       
+	    	
 	    	ArrayList<ProjectileEnnemy>  tirsEnnemi = ennemy.getProjectiles(); 
 	        
 	        for (int k = tirsEnnemi.size() - 1; k >= 0; k--) {
