@@ -12,10 +12,10 @@ public class ProjectilePlayer2 extends ProjectilePlayer{
 		super(a_gp,p);
 	}
 	protected void setDefaultValues() {
-		m_x = m_p.getX()+10;
-		m_y = m_p.getY()+10;
-		m_speed = 8;
-		m_degat=20;
+		m_x = m_p.getX();
+		m_y = m_p.getY() + 10;
+		m_speed = 10;
+		m_degat=30;
 	}
 	
 	
@@ -26,5 +26,9 @@ public class ProjectilePlayer2 extends ProjectilePlayer{
 			e.printStackTrace();
 		}
 	}
+	public void update() {
+		m_y-=m_speed;
+	}
+	
 
 }

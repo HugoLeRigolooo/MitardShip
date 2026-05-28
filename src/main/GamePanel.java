@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 import entity.Ennemy;
 import entity.EnnemyBase;
+import entity.EnnemyKamikaze;
+import entity.EnnemyCircularVertical;
 import entity.Player;
 import tile.TileManager;
 
@@ -23,9 +25,9 @@ public class GamePanel extends JPanel implements Runnable{
 	final int SCALE = 3; 										// �chelle utilis�e pour agrandir l'affichage
 	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; 	// 48x48
 	public final int MAX_SCREEN_COL = 80;						// Nombre de tuile en longueur de l'ensemble affiché
-	public final int MAX_WORLD_COL=160;							// Nombre de tuile en longueur de l'ensemble de la map
+	public final int MAX_WORLD_COL= 160;							// Nombre de tuile en longueur de l'ensemble de la map
 	public final int MAX_SCREE_ROW = 60;							// Nombre de tuile en largeur de l'ensemble affiché
-	public final int MAX_WORLD_ROW=300;							// Nombre de tuile en largeur de l'ensemble de la map
+	public final int MAX_WORLD_ROW= 300;							// Nombre de tuile en largeur de l'ensemble de la map
 	public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
 	public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREE_ROW;	// 576 pixels
 
@@ -38,8 +40,10 @@ public class GamePanel extends JPanel implements Runnable{
 	Player m_player;
 	TileManager m_tileM;
 	public Menu m_menu;
+	GameOver m_gameover;
 	
 	public int m_position; //position de la caméra
+	public int score; //score du joueur
 	
 	//parametre des gamestate
 	public final int startState = 0;
@@ -47,6 +51,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int pauseState = 2;
 	public final int gameOverState = 3;
 	public int m_gameState; // État du jeu
+	public int compteur; //pour bouton menu gameover
 		
 	/**
 	 * Constructeur
@@ -58,9 +63,10 @@ public class GamePanel extends JPanel implements Runnable{
 		m_tileM = new TileManager(this);
 		m_menu = new Menu(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
-		m_gameState=startState; //temporaire mais faut commencer par start
+		m_gameState=startState;
+		m_gameover=new GameOver(this, m_keyH);
 		
-		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+		this.setPreferredSize(new Dimension(SCREEN_WIDTH+30, SCREEN_HEIGHT)); //+30 : Place pour la barre de progression
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(m_keyH);
@@ -73,6 +79,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public void startGameThread() {
 		m_gameThread = new Thread(this);
 		m_gameThread.start();
+	}
+
+	public TileManager getTileManager() {
+		return m_tileM;
 	}
 	
 	public void run() {
@@ -101,20 +111,32 @@ public class GamePanel extends JPanel implements Runnable{
 				nextDrawTime += drawInterval;
 				
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 	
-
+	public void drawProgression(Graphics2D g2) {
+		int hauteur=SCREEN_HEIGHT-25;
+		int largeur=10;
+		int x=SCREEN_WIDTH+5;
+		int y=10;
+		g2.setColor(Color.WHITE);
+		g2.drawRect(x, y, largeur, hauteur);
+		g2.setColor(Color.YELLOW);
+		double hauteur_avancer=((((double) TILE_SIZE*(double) MAX_WORLD_ROW)+m_position)*(double) hauteur)/((double) TILE_SIZE*(double) MAX_WORLD_ROW);
+		g2.fillRect(x+1, ((int) hauteur+y)-(int) hauteur_avancer, largeur-1, (int) hauteur_avancer);
+	}
+	
+	
 	/**
 	 * Mise � jour des donn�es des entit�s
 	 */
 	public void update() {
-		if (m_gameState == playState) {
-	        m_player.update();
-	    }
+		if (m_gameState==playState) {
+			m_player.update();
+			m_position+=5;
+		}
 	}
 	
 	/**
@@ -125,12 +147,20 @@ public class GamePanel extends JPanel implements Runnable{
 	    Graphics2D g2 = (Graphics2D) g;
 	    if (m_gameState == startState) {
 	        m_menu.draw(g2);
-	    } else if (m_gameState == playState) {
-	        m_tileM.draw(g2);
-	        m_player.draw(g2);
-	    }
+	    }else if (m_gameState==playState){
+			m_tileM.draw(g2);
+			m_player.draw(g2);
+			drawProgression(g2);
 
-	    g2.dispose();
+			g2.setColor(Color.WHITE);
+			g2.drawString("Score: " + score, 50, 50);
+		}else if(m_gameState==gameOverState) {
+			m_tileM.draw(g2);
+			m_player.draw(g2);
+			drawProgression(g2);
+			m_gameover.draw(g2);
+		}
+		g2.dispose();
 	}
 	
 }

@@ -11,7 +11,7 @@ public abstract class ProjectilePlayer extends ProjectileBase{
 	
 	
 	public ProjectilePlayer (GamePanel a_gp, Player p) {
-		super(a_gp);
+		super(a_gp,0,0);
 		m_p=p;
 		this.setDefaultValues();
 		this.getProjectileImage();
@@ -21,10 +21,7 @@ public abstract class ProjectilePlayer extends ProjectileBase{
 	
 	public abstract void getProjectileImage();
 	
-	public void update() {
-		m_y+=m_speed;
-	}
-	
+	public abstract void update();
 	
 	
 	

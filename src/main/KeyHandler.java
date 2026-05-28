@@ -3,14 +3,19 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import tile.TileManager;
+
 public class KeyHandler implements KeyListener {
     
-    GamePanel m_gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public GamePanel m_gp;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
 
-    public KeyHandler(GamePanel gp) {
-        this.m_gp = gp;
-    }
+
+    
+	
+	public KeyHandler(GamePanel gp){
+		this.m_gp=gp;
+	}
 
     @Override
     public void keyTyped(KeyEvent e) {}
@@ -41,26 +46,39 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
-        else if (m_gp.m_gameState == m_gp.playState) {
-            if (code == KeyEvent.VK_Z || code == KeyEvent.VK_UP) upPressed = true;
-            if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) downPressed = true;
-            if (code == KeyEvent.VK_Q || code == KeyEvent.VK_LEFT) leftPressed = true;
-            if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) rightPressed = true;
-            if (code == KeyEvent.VK_SPACE) {
-                System.out.println("Lance le projectile");
+        if (m_gp.m_gameState==m_gp.gameOverState) {
+        	if (code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN){
+            	if (m_gp.m_gameover.commandNum==1) {
+            		m_gp.m_gameover.commandNum=0;
+            	}else {
+            		m_gp.m_gameover.commandNum=1;
+            	}
             }
+        	if (code==KeyEvent.VK_ENTER) {
+        		if (m_gp.m_gameover.commandNum==0) {
+        			m_gp.m_gameState=m_gp.playState;
+        			m_gp.m_position=-(m_gp.MAX_WORLD_ROW * m_gp.TILE_SIZE) + m_gp.SCREEN_HEIGHT;
+        			m_gp.m_tileM = new TileManager(m_gp);
+        		}else {
+        			System.exit(0);
+        		}
+        	}
         }
+        if (code == KeyEvent.VK_Z || code == KeyEvent.VK_UP) upPressed = true;
+        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) downPressed = true;
+        if (code == KeyEvent.VK_Q || code == KeyEvent.VK_LEFT) leftPressed = true;
+        if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) rightPressed = true;
+        if (code == KeyEvent.VK_SPACE) spacePressed = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
-        
-        if (m_gp.m_gameState == m_gp.playState) {
-            if (code == KeyEvent.VK_Z || code == KeyEvent.VK_UP) upPressed = false;
-            if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) downPressed = false;
-            if (code == KeyEvent.VK_Q || code == KeyEvent.VK_LEFT) leftPressed = false;
-            if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) rightPressed = false;
-        }
+        if (code == KeyEvent.VK_Z || code == KeyEvent.VK_UP) upPressed = false;
+        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) downPressed = false;
+        if (code == KeyEvent.VK_Q || code == KeyEvent.VK_LEFT) leftPressed = false;
+        if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) rightPressed = false;
+        if (code == KeyEvent.VK_SPACE) spacePressed = false;
     }
+
 }
