@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 import entity.Ennemy;
 import entity.EnnemyBase;
+import entity.EnnemyKamikaze;
+import entity.EnnemyCircularVertical;
 import entity.Player;
 import tile.TileManager;
 
@@ -55,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
 		m_FPS = 60;				
 		m_keyH = new KeyHandler();
 		m_player = new Player(this, m_keyH);
-		m_e = new EnnemyBase(this,150,160);
+		m_e = new EnnemyBase(this,300,180);
 		m_tileM = new TileManager(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
 		m_gameState=playState; //temporaire mais faut commencer par start
