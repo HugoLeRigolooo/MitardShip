@@ -9,10 +9,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 
-import entity.ProjectilePlayer;
-import entity.ProjectilePlayer1;
-import entity.ProjectilePlayer2;
-import entity.ProjectilePlayer3;
+
 
 
 /**
@@ -34,10 +31,7 @@ public class Player extends Entity{
 		this.m_keyH = a_keyH;
 		this.setDefaultValues();
 		this.getPlayerImage();
-		ProjectilePlayer projectilePlayer1 = new ProjectilePlayer1(m_gp, m_keyH);
-		ProjectilePlayer projectilePlayer2 = new ProjectilePlayer2(m_gp, m_keyH);
-		ProjectilePlayer projectilePlayer3 = new ProjectilePlayer3(m_gp, m_keyH);
-		ProjectilePlayer projectile_actuel = projectilePlayer1;
+
 	}
 	
 	/**
@@ -50,6 +44,11 @@ public class Player extends Entity{
 		m_collision_ennemi = false;
 		m_collision_projectile = false;
 		vie = 100;
+		
+		ProjectilePlayer projectilePlayer1 = new ProjectilePlayer1(m_gp,this);
+		ProjectilePlayer projectilePlayer2 = new ProjectilePlayer2(m_gp,this);
+		ProjectilePlayer projectilePlayer3 = new ProjectilePlayer3(m_gp,this);
+		ProjectilePlayer projectile_actuel = projectilePlayer1;
 	}
 	
 	/**
