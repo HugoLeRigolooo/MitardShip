@@ -37,6 +37,10 @@ public class Player extends Entity{
 		m_x = 100;
 		m_y = 100;
 		m_speed = 4;
+		m_collision_mur = false;
+		m_collision_ennemi = false;
+		m_collision_projectile = false;
+		vie = 100;
 	}
 	
 	/**
@@ -80,5 +84,12 @@ public class Player extends Entity{
 		a_g2.drawImage(l_image, m_x, m_y, m_gp.TILE_SIZE, m_gp.TILE_SIZE, null);
 	}
 	
+	int getX() {
+		return m_x;
+	}
+
+	int getY() {
+		return m_y;
+	}
 	
 }
