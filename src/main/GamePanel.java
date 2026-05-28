@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread m_gameThread;
 	Player m_player;
 	TileManager m_tileM;
+	public Menu m_menu;
 	GameOver m_gameover;
 	
 	public int m_position; //position de la caméra
@@ -64,8 +65,9 @@ public class GamePanel extends JPanel implements Runnable{
 		m_keyH = new KeyHandler(this);
 		m_player = new Player(this, m_keyH);
 		m_tileM = new TileManager(this);
+		m_menu = new Menu(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
-		m_gameState=playState; //temporaire mais faut commencer par start
+		m_gameState=startState;
 		m_gameover=new GameOver(this, m_keyH);
 		
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH+30, SCREEN_HEIGHT)); //+30 : Place pour la barre de progression
@@ -231,8 +233,10 @@ public class GamePanel extends JPanel implements Runnable{
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		if (m_gameState==playState){
+	    Graphics2D g2 = (Graphics2D) g;
+	    if (m_gameState == startState) {
+	        m_menu.draw(g2);
+	    }else if (m_gameState==playState){
 			m_tileM.draw(g2);
 			m_player.draw(g2);
 

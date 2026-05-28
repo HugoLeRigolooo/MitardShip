@@ -5,24 +5,47 @@ import java.awt.event.KeyListener;
 
 import tile.TileManager;
 
-/**
- * Gestionnaire d'�v�nements (touche clavier)
- *
- */
-public class KeyHandler implements KeyListener{
-	public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
-	public GamePanel m_gp;
+public class KeyHandler implements KeyListener {
+    
+    public GamePanel m_gp;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
+
+
+    
 	
-	KeyHandler(GamePanel gp){
-		m_gp=gp;
+	public KeyHandler(GamePanel gp){
+		this.m_gp=gp;
 	}
 
-	@Override
+    @Override
     public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        
+        if (m_gp.m_gameState == m_gp.startState) {
+            if (code == KeyEvent.VK_UP) {
+                m_gp.m_menu.m_commandNum--;
+                if (m_gp.m_menu.m_commandNum < 0) {
+                    m_gp.m_menu.m_commandNum = 1;
+                }
+            }
+            if (code == KeyEvent.VK_DOWN) {
+                m_gp.m_menu.m_commandNum++;
+                if (m_gp.m_menu.m_commandNum > 1) {
+                    m_gp.m_menu.m_commandNum = 0;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if (m_gp.m_menu.m_commandNum == 0) {
+                    m_gp.m_gameState = m_gp.playState;
+                }
+                if (m_gp.m_menu.m_commandNum == 1) {
+                    System.exit(0);
+                }
+            }
+        }
         if (m_gp.m_gameState==m_gp.gameOverState) {
         	if (code == KeyEvent.VK_UP || code == KeyEvent.VK_DOWN){
             	if (m_gp.m_gameover.commandNum==1) {
