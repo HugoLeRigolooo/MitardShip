@@ -45,7 +45,7 @@ public class Player extends Entity{
 	public void getPlayerImage() {
 		//gestion des expections 
 		try {
-			m_idleImage = ImageIO.read(getClass().getResource("/player/superhero.png"));
+			m_idleImage = ImageIO.read(getClass().getResource("/player/vaisseau.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,10 +55,19 @@ public class Player extends Entity{
 	 * Mise � jour des donn�es du joueur
 	 */
 	public void update() {
-		
-		
-		
-	}
+        if (m_keyH.upPressed) {
+            m_y -= m_speed;
+        }
+        if (m_keyH.downPressed) {
+            m_y += m_speed;
+        }
+        if (m_keyH.leftPressed) {
+            m_x -= m_speed;
+        }
+        if (m_keyH.rightPressed) {
+            m_x += m_speed;
+        }
+    }
 	
 	/**
 	 * Affichage du l'image du joueur dans la fen�tre du jeu
