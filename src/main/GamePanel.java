@@ -19,13 +19,13 @@ import java.awt.Graphics2D;
 public class GamePanel extends JPanel implements Runnable{
 	
 	//Param�tres de l'�cran
-	final int ORIGINAL_TILE_SIZE = 2; 							// une tuile de taille 16x16
+	final int ORIGINAL_TILE_SIZE = 4; 							// une tuile de taille 16x16
 	final int SCALE = 3; 										// �chelle utilis�e pour agrandir l'affichage
 	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; 	// 48x48
-	public final int MAX_SCREEN_COL = 160;						// Nombre de tuile en longueur de l'ensemble affiché
+	public final int MAX_SCREEN_COL = 80;						// Nombre de tuile en longueur de l'ensemble affiché
 	public final int MAX_WORLD_COL=160;							// Nombre de tuile en longueur de l'ensemble de la map
-	public final int MAX_SCREE_ROW = 120;							// Nombre de tuile en largeur de l'ensemble affiché
-	public final int MAX_WORLD_ROW=600;							// Nombre de tuile en largeur de l'ensemble de la map
+	public final int MAX_SCREE_ROW = 60;							// Nombre de tuile en largeur de l'ensemble affiché
+	public final int MAX_WORLD_ROW=300;							// Nombre de tuile en largeur de l'ensemble de la map
 	public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
 	public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREE_ROW;	// 576 pixels
 
@@ -56,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
 		m_player = new Player(this, m_keyH);
 		m_tileM = new TileManager(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
-		m_gameState=playState; //temporaire mais faut commencer par 
+		m_gameState=playState; //temporaire mais faut commencer par start
 		
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);

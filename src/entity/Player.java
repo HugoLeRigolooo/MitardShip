@@ -103,7 +103,7 @@ public class Player extends Entity{
 		// r�cup�re l'image du joueur
 		BufferedImage l_image = m_idleImage;
 		// affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
-		a_g2.drawImage(l_image, m_x, m_y, m_gp.TILE_SIZE, m_gp.TILE_SIZE, null);
+		a_g2.drawImage(l_image, m_x, m_y, m_gp.TILE_SIZE*6, m_gp.TILE_SIZE*6, null);
 	}
 	
 	int getX() {
