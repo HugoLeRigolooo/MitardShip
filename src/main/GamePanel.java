@@ -23,9 +23,9 @@ public class GamePanel extends JPanel implements Runnable{
 	final int SCALE = 3; 										// �chelle utilis�e pour agrandir l'affichage
 	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; 	// 48x48
 	public final int MAX_SCREEN_COL = 80;						// Nombre de tuile en longueur de l'ensemble affiché
-	public final int MAX_WORLD_COL=160;							// Nombre de tuile en longueur de l'ensemble de la map
+	public final int MAX_WORLD_COL= 160;							// Nombre de tuile en longueur de l'ensemble de la map
 	public final int MAX_SCREE_ROW = 60;							// Nombre de tuile en largeur de l'ensemble affiché
-	public final int MAX_WORLD_ROW=300;							// Nombre de tuile en largeur de l'ensemble de la map
+	public final int MAX_WORLD_ROW= 300;							// Nombre de tuile en largeur de l'ensemble de la map
 	public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
 	public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREE_ROW;	// 576 pixels
 

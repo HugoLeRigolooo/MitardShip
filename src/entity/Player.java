@@ -71,11 +71,11 @@ public class Player extends Entity {
 		
 			ProjectilePlayer mGauche = new ProjectilePlayer2(m_gp, this);
 			
-			mGauche.setX(this.m_x - 30);
+			mGauche.setX(this.m_x);
 			
 	
 			ProjectilePlayer mDroit = new ProjectilePlayer2(m_gp, this);
-			mDroit.setX(this.m_x + 30);
+			mDroit.setX(this.m_x + 60);
 			
 			m_projectiles.add(mGauche);
 			m_projectiles.add(mDroit);}
@@ -83,7 +83,7 @@ public class Player extends Entity {
 		else {
 			
 			ProjectilePlayer mGauche = new ProjectilePlayer3(m_gp, this,1);
-			mGauche.setX(this.m_x - 35);
+			mGauche.setX(this.m_x + 20);
 			
 			ProjectilePlayer mMilieu = new ProjectilePlayer3(m_gp, this,0); 
 			
@@ -93,9 +93,6 @@ public class Player extends Entity {
 			m_projectiles.add(mGauche);
 			m_projectiles.add(mMilieu);
 			m_projectiles.add(mDroit);}
-			
-			
-			
 		}
 
     public void update() {
@@ -138,7 +135,7 @@ public class Player extends Entity {
 		}
 		
 		if (m_keyH.spacePressed && m_cooldownTir == 0) {
-			tirer(2);
+			tirer(3);
 			m_cooldownTir = m_cadenceTir; 
 		}
 		
