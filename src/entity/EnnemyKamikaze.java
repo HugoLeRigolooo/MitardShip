@@ -20,8 +20,8 @@ public class EnnemyKamikaze extends Ennemy {
 	 * @param a_gp GamePanel, pannel principal du jeu
 	 * @param a_keyH KeyHandler, gestionnaire des touches 
 	 */
-	public EnnemyKamikaze(GamePanel a_gp) {
-		super(a_gp);
+	public EnnemyKamikaze(GamePanel a_gp, int typeTir, int cadenceTir) {
+		super(a_gp,typeTir, cadenceTir);
 		Random r = new Random();
 		this.m_gp = a_gp;
 		this.setDefaultValues();
@@ -30,7 +30,7 @@ public class EnnemyKamikaze extends Ennemy {
 		m_target_y = m_gp.SCREEN_HEIGHT;
 	}
 	
-	public void update() {
+	public void update_move() {
 		double dx = m_target_x-m_init_x;
 		double dy = m_target_y-m_init_y;
 		double distance = Math.sqrt(dx * dx + dy * dy);

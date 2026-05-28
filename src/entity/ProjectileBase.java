@@ -13,6 +13,7 @@ public abstract class ProjectileBase extends Entity{
 	int m_degat;
 	GamePanel m_gp;
 	boolean en_collision; //si le projectile a une collision se met sur true donc le projectile ne s'affiche plus
+	int m_speed;
 
 
 	/**
@@ -22,14 +23,13 @@ public abstract class ProjectileBase extends Entity{
 	 * @param e Entity, tireur du projectile
 	 
 	 */
-	public ProjectileBase(GamePanel a_gp) {
+	public ProjectileBase(GamePanel a_gp, int degat, int speed) {
 		this.m_gp = a_gp;
+		m_speed=speed;
 
 		en_collision = false;
 	}
-	
-	
-	protected abstract void setDefaultValues();
+
 	
 	/**
 	 * R�cup�ration de l'image de projectile

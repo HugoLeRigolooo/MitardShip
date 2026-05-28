@@ -22,8 +22,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 	 * @param a_keyH KeyHandler, gestionnaire des touches 
 	 */
 	
-	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed) {
-		super(a_gp, x, y, speed);
+	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed,int type_tire) {
+		super(a_gp, x, y, speed,type_tire);
 		Random r = new Random();
 		this.m_gp = a_gp;
 		this.getEnnemyImage();
@@ -32,8 +32,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_side=0;
 	}
 	
-	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp) {
-		super(a_gp, x, y, speed);
+	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp, int type_tire) {
+		super(a_gp, x, y, speed,type_tire);
 		Random r = new Random();
 		this.m_gp = a_gp;
 		this.getEnnemyImage();
@@ -42,8 +42,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_side=0;
 	}
 	
-	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp, int dir) {
-		super(a_gp, x, y, speed);
+	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp, int dir, int typeTir, int cadenceTir) {
+		super(a_gp, x, y, speed, typeTir, cadenceTir);
 		Random r = new Random();
 		this.m_gp = a_gp;
 		this.getEnnemyImage();
@@ -52,8 +52,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_dir=dir;
 	}
 	
-	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp, int dir, int side) {
-		super(a_gp, x, y, speed);
+	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp, int dir, int side, int typeTir, int cadenceTir) {
+		super(a_gp, x, y, speed,typeTir, cadenceTir);
 		Random r = new Random();
 		this.m_gp = a_gp;
 		this.getEnnemyImage();
@@ -62,8 +62,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_dir=dir;
 	}
 	
-	public EnnemyWaveHorizontal(GamePanel a_gp) {
-		super(a_gp,0,a_gp.SCREEN_HEIGHT);
+	public EnnemyWaveHorizontal(GamePanel a_gp, int typeTir, int cadenceTir) {
+		super(a_gp,0,a_gp.SCREEN_HEIGHT,typeTir, cadenceTir);
 		Random r = new Random();
 		this.m_gp = a_gp;
 		this.getEnnemyImage();
@@ -71,7 +71,7 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_amp = m_gp.SCREEN_HEIGHT/8;
 	}
 	
-	public void update() {
+	public void update_move() {
 		if(m_dir == 0) {			
 			m_y = (int) (m_init_y + m_amp * Math.sin(m_x*0.05));	
 			if (m_side == 0) {
