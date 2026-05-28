@@ -36,27 +36,43 @@ public class TileManager {
 	public void getTileImage() {
 		try {
 			m_tile[0] = new Tile();
-			m_tile[0].m_image = ImageIO.read(getClass().getResource("/tiles/fond.png"));
+			m_tile[0].m_image = ImageIO.read(getClass().getResource("/tiles/fond_noir.png"));
 			
 			m_tile[1] = new Tile();
-			m_tile[1].m_image = ImageIO.read(getClass().getResource("/tiles/etoile4.png"));
+			m_tile[1].m_image = ImageIO.read(getClass().getResource("/tiles/etoiletest1.png"));
 			
 			m_tile[2] = new Tile();
-			m_tile[2].m_image = ImageIO.read(getClass().getResource("/tiles/etoile5.png"));
+			m_tile[2].m_image = ImageIO.read(getClass().getResource("/tiles/etoiletest2.png"));
 			
 			m_tile[3] = new Tile();
-			m_tile[3].m_image = ImageIO.read(getClass().getResource("/tiles/etoile6.png"));
+			m_tile[3].m_image = ImageIO.read(getClass().getResource("/tiles/etoiletest3.png"));
 			
 			m_tile[4] = new Tile();
-			m_tile[4].m_image = ImageIO.read(getClass().getResource("/tiles/etoile10.png"));
+			m_tile[4].m_image = ImageIO.read(getClass().getResource("/tiles/etoiletest4.png"));
 			
 			m_tile[5] = new Tile();
-			m_tile[5].m_image = ImageIO.read(getClass().getResource("/tiles/etoile12.png"));
+			m_tile[5].m_image = ImageIO.read(getClass().getResource("/tiles/etoiletest5.png"));
+			
+			m_tile[6] = new Tile();
+			m_tile[6].m_image = ImageIO.read(getClass().getResource("/tiles/etoiletest6.png"));
+			
+			m_tile[7] = new Tile();
+			m_tile[7].m_image = ImageIO.read(getClass().getResource("/tiles/fond_blanc.png"));
+			
+			m_tile[8] = new Tile();
+			m_tile[8].m_image = ImageIO.read(getClass().getResource("/tiles/fond_noir.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
+	public int getTileNum(int col, int row) {
+    if (col >= 0 && col < m_gp.MAX_WORLD_COL && row >= 0 && row < m_gp.MAX_WORLD_ROW) {
+        return m_mapTileNum[col][row];
+    }
+    return 0;
+}
 	
 	/**
 	 * Lecture du fichier txt contenant la map et chargement des tuiles correspondantes.
@@ -66,12 +82,28 @@ public class TileManager {
 		double fondProba = 0.97;
 		for (int row = 0; row < m_gp.MAX_WORLD_ROW; row++) {
 	        for (int col = 0; col < m_gp.MAX_WORLD_COL; col++) {
-	            double roll = rand.nextDouble();
-	            if (roll < fondProba) {
-	                m_mapTileNum[col][row] = 0;
-	            } else {
-	                m_mapTileNum[col][row] = rand.nextInt(5) + 1;
-	            }
+	        	if (row == 50 || row == 51 || row == 52) {
+	        		if (row % 2 == 0) {
+		        		if (col % 2 == 0) {
+		        			m_mapTileNum[col][row] = 7;
+		        		} else {
+		        			m_mapTileNum[col][row] = 8;
+		        		}
+	        		} else {
+	        			if (col % 2 == 0) {
+		        			m_mapTileNum[col][row] = 8;
+		        		} else {
+		        			m_mapTileNum[col][row] = 7;
+		        		}
+	        		}
+	        	} else {
+		            double roll = rand.nextDouble();
+		            if (roll < fondProba) {
+		                m_mapTileNum[col][row] = 0;
+		            } else {
+		                m_mapTileNum[col][row] = rand.nextInt(6) + 1;
+		            }
+	        	}
 	        }
 	    }
 	}

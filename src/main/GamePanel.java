@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 import entity.Ennemy;
 import entity.EnnemyBase;
+import entity.EnnemyKamikaze;
+import entity.EnnemyCircularVertical;
 import entity.Player;
 import tile.TileManager;
 
@@ -22,10 +24,10 @@ public class GamePanel extends JPanel implements Runnable{
 	final int ORIGINAL_TILE_SIZE = 4; 							// une tuile de taille 16x16
 	final int SCALE = 3; 										// �chelle utilis�e pour agrandir l'affichage
 	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; 	// 48x48
-	public final int MAX_SCREEN_COL = 80;						// Nombre de tuile en largeur de l'ensemble affiché
-	public final int MAX_WORLD_COL=80;							// Nombre de tuile en largeur de l'ensemble de la map
-	public final int MAX_SCREE_ROW = 60;							// Nombre de tuile en hauteur de l'ensemble affiché
-	public final int MAX_WORLD_ROW=600;							// Nombre de tuile en hauteur de l'ensemble de la map
+	public final int MAX_SCREEN_COL = 80;						// Nombre de tuile en longueur de l'ensemble affiché
+	public final int MAX_WORLD_COL= 160;							// Nombre de tuile en longueur de l'ensemble de la map
+	public final int MAX_SCREE_ROW = 60;							// Nombre de tuile en largeur de l'ensemble affiché
+	public final int MAX_WORLD_ROW= 300;							// Nombre de tuile en largeur de l'ensemble de la map
 	public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
 	public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREE_ROW;	// 576 pixels
 
@@ -36,10 +38,12 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler m_keyH;
 	Thread m_gameThread;
 	Player m_player;
+	Ennemy m_e;
 	TileManager m_tileM;
 	GameOver m_gameover;
 	
 	public int m_position; //position de la caméra
+	public int score; //score du joueur
 	
 	//parametre des gamestate
 	public final int startState = 0;
@@ -56,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
 		m_FPS = 60;				
 		m_keyH = new KeyHandler(this);
 		m_player = new Player(this, m_keyH);
+		m_e = new EnnemyBase(this,300,180);
 		m_tileM = new TileManager(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
 		m_gameState=playState; //temporaire mais faut commencer par start
@@ -74,6 +79,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public void startGameThread() {
 		m_gameThread = new Thread(this);
 		m_gameThread.start();
+	}
+
+	public TileManager getTileManager() {
+		return m_tileM;
 	}
 	
 	public void run() {
@@ -102,7 +111,6 @@ public class GamePanel extends JPanel implements Runnable{
 				nextDrawTime += drawInterval;
 				
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -141,6 +149,10 @@ public class GamePanel extends JPanel implements Runnable{
 			m_tileM.draw(g2);
 			m_player.draw(g2);
 			drawProgression(g2);
+			m_e.draw(g2);
+
+			g2.setColor(Color.WHITE);
+			g2.drawString("Score: " + score, 50, 50);
 		}else if(m_gameState==gameOverState) {
 			m_tileM.draw(g2);
 			m_player.draw(g2);

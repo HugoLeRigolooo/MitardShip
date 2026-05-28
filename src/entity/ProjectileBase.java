@@ -51,5 +51,14 @@ public abstract class ProjectileBase extends Entity{
 			BufferedImage l_image = m_idleImage;
 			a_g2.drawImage(l_image, m_x, m_y, m_gp.TILE_SIZE, m_gp.TILE_SIZE, null);}
 		}
+	
+	
+	
+	public int getX() {return m_x;}
+	public int getY() {return m_y;}
+	
+	
+	public void setX(int x) {m_x=x;}
+	public void setY(int y) {m_y=y;}
 
 }
