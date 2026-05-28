@@ -160,12 +160,5 @@ public class Player extends Entity {
         }
     }
 	
-	int getX() {
-		return m_x;
-	}
 
-	int getY() {
-		return m_y;
-	}
-	
 }

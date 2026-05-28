@@ -11,8 +11,8 @@ public class ProjectileEnnemy1 extends ProjectileEnnemy {
 		super(a_gp,e);
 	}
 	protected void setDefaultValues() {
-		//m_x = m_e.getX()+10;
-		//m_y = m_e.getY()+10;
+		m_x = m_e.getX()+10;
+		m_y = m_e.getY()+10;
 		m_speed = 8;
 		m_degat=20;
 	}
@@ -20,7 +20,7 @@ public class ProjectileEnnemy1 extends ProjectileEnnemy {
 	
 	public void getProjectileImage() {
 		try {
-			m_idleImage = ImageIO.read(getClass().getResource("/projectiles/projectileEnnemy1.png"));
+			m_idleImage = ImageIO.read(getClass().getResource("/projectiles/projectilePlayer1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
