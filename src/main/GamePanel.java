@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int MAX_WORLD_ROW= 300;							// Nombre de tuile en largeur de l'ensemble de la map
 	public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
 	public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREE_ROW;	// 576 pixels
+	public final int MAP_SIZE = MAX_WORLD_ROW*TILE_SIZE;
 
 	// FPS : taux de rafraichissement
 	int m_FPS;
@@ -55,6 +56,16 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int gameOverState = 3;
 	public int m_gameState; // État du jeu
 	public int compteur; //pour bouton menu gameover
+	
+	//bool_vague
+	
+	boolean vague1;
+	boolean vague2;
+	boolean vague3;
+	boolean vague4;
+	boolean vague5;
+	boolean vague6;
+	boolean vague7;
 		
 	/**
 	 * Constructeur
@@ -204,6 +215,29 @@ public class GamePanel extends JPanel implements Runnable{
 		g2.fillRect(x+1, ((int) hauteur+y)-(int) hauteur_avancer, largeur-1, (int) hauteur_avancer);
 	}
 	
+	public void spawnEnemies() {
+		
+			if (!vague1 && m_position>-1900) {
+				new EnnemyBase(this, 0, 5, 1, 40);
+				new EnnemyBase(this, 0, 5, 1, 40);
+				new EnnemyBase(this, 0, 5, 1, 40);
+				new EnnemyBase(this, 0, 5, 1, 40);
+				new EnnemyBase(this, 0, 5, 1, 40);
+				vague1=true;
+			}
+			if (!vague2 && m_position>MAP_SIZE+SCREEN_HEIGHT*1){
+				vague2=true;
+			}
+			if (!vague3 && m_position>MAP_SIZE+SCREEN_HEIGHT*2){
+				vague3=true;
+			}
+			if (!vague4 && m_position>MAP_SIZE+SCREEN_HEIGHT*3){
+				vague4=true;
+			}
+			if (!vague5 && m_position>MAP_SIZE+SCREEN_HEIGHT*4){
+				vague5=true;
+			}
+	}
 	
 
 	/**
@@ -215,13 +249,15 @@ public class GamePanel extends JPanel implements Runnable{
 			for (int i = Ennemy.listEnnemy.size() - 1; i >= 0; i--) {
 				Ennemy.listEnnemy.get(i).update();
 			}
-			
+			System.out.println(m_position);
+			System.out.println(MAP_SIZE);
 
 			checkCollisions();
 
 			
 			m_player.update();
 			m_position+=5;
+			spawnEnemies();
 		}
 	}
 	
