@@ -8,6 +8,7 @@ public class EnnemyBounce extends Ennemy {
 
 	int m_speed_x;
 	int m_speed_y;
+	int scoreValue;
 	/**
 	 * Constructeur de Player
 	 * @param a_gp GamePanel, pannel principal du jeu
@@ -19,6 +20,8 @@ public class EnnemyBounce extends Ennemy {
 		this.getEnnemyImage();
 		m_speed_x = 4;
 		m_speed_y = 4;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyBounce(GamePanel a_gp, int x, int y, int speed) {
@@ -26,6 +29,8 @@ public class EnnemyBounce extends Ennemy {
 		this.getEnnemyImage();
 		m_speed_x = speed;
 		m_speed_y = speed;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyBounce(GamePanel a_gp, int x, int y, int speed_x, int speed_y) {
@@ -33,6 +38,8 @@ public class EnnemyBounce extends Ennemy {
 		this.getEnnemyImage();
 		m_speed_x = speed_x;
 		m_speed_y = speed_y;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public void update() {

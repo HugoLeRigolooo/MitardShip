@@ -42,6 +42,7 @@ public class GamePanel extends JPanel implements Runnable{
 	TileManager m_tileM;
 	
 	public int m_position; //position de la caméra
+	public int score; //score du joueur
 	
 	//parametre des gamestate
 	public final int startState = 0;
@@ -61,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
 		m_tileM = new TileManager(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
 		m_gameState=playState; //temporaire mais faut commencer par start
+		score = 0;
 		
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
@@ -131,6 +133,9 @@ public class GamePanel extends JPanel implements Runnable{
 			m_tileM.draw(g2);
 			m_player.draw(g2);
 			m_e.draw(g2);
+
+			g2.setColor(Color.WHITE);
+			g2.drawString("Score: " + score, 50, 50);
 		}
 		g2.dispose();
 	}

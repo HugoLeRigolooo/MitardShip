@@ -15,6 +15,7 @@ public class EnnemyVertical extends Ennemy {
 
 	int m_target_x;
 	int m_target_y;
+	int scoreValue;
 	/**
 	 * Constructeur de Player
 	 * @param a_gp GamePanel, pannel principal du jeu
@@ -24,11 +25,15 @@ public class EnnemyVertical extends Ennemy {
 	public EnnemyVertical(GamePanel a_gp, int x, int y) {
 		super(a_gp, x,y,2);
 		this.getEnnemyImage();
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyVertical(GamePanel a_gp, int x, int y, int speed) {
 		super(a_gp, x ,y, speed);
 		this.getEnnemyImage();
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public void update() {

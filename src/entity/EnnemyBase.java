@@ -13,6 +13,7 @@ public class EnnemyBase extends Ennemy {
 	int m_target_y;
 	int m_cooldownTir; 
 	int m_cadenceTir;
+	int scoreValue;
 	/**
 	 * Constructeur de Player
 	 * @param a_gp GamePanel, pannel principal du jeu
@@ -28,6 +29,8 @@ public class EnnemyBase extends Ennemy {
 		m_target_y = y_target;
 		m_cooldownTir = 0;   
 		m_cadenceTir = 25;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	private void tirer() {
