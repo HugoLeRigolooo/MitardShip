@@ -22,8 +22,10 @@ public class GamePanel extends JPanel implements Runnable{
 	final int ORIGINAL_TILE_SIZE = 2; 							// une tuile de taille 16x16
 	final int SCALE = 3; 										// �chelle utilis�e pour agrandir l'affichage
 	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; 	// 48x48
-	public final int MAX_SCREEN_COL = 160;
-	public final int MAX_SCREE_ROW = 120; 					 	// ces valeurs donnent une r�solution 4:3
+	public final int MAX_SCREEN_COL = 160;						// Nombre de tuile en longueur de l'ensemble affiché
+	public final int MAX_WORLD_COL=160;							// Nombre de tuile en longueur de l'ensemble de la map
+	public final int MAX_SCREE_ROW = 120;							// Nombre de tuile en largeur de l'ensemble affiché
+	public final int MAX_WORLD_ROW=600;							// Nombre de tuile en largeur de l'ensemble de la map
 	public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
 	public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREE_ROW;	// 576 pixels
 
@@ -34,8 +36,16 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler m_keyH;
 	Thread m_gameThread;
 	Player m_player;
-	Ennemy m_ennemy;
 	TileManager m_tileM;
+	
+	public int m_position; //position de la caméra
+	
+	//parametre des gamestate
+	public final int startState = 0;
+	public final int playState = 1;
+	public final int pauseState = 2;
+	public final int gameOverState = 3;
+	public int m_gameState; // État du jeu
 		
 	/**
 	 * Constructeur
@@ -43,9 +53,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public GamePanel() {
 		m_FPS = 60;				
 		m_keyH = new KeyHandler();
-		m_ennemy = new EnnemyBase(this);
 		m_player = new Player(this, m_keyH);
 		m_tileM = new TileManager(this);
+		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
+		m_gameState=playState; //temporaire mais faut commencer par 
 		
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
@@ -100,7 +111,6 @@ public class GamePanel extends JPanel implements Runnable{
 	 */
 	public void update() {
 		m_player.update();
-		m_ennemy.update();
 	}
 	
 	/**
@@ -109,9 +119,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		m_tileM.draw(g2);
-		m_player.draw(g2);
-		m_ennemy.draw(g2);
+		if (m_gameState==playState){
+			m_tileM.draw(g2);
+			m_player.draw(g2);
+		}
 		g2.dispose();
 	}
 	

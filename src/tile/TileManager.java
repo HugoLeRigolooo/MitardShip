@@ -25,7 +25,7 @@ public class TileManager {
 	public TileManager(GamePanel gp) {
 		this.m_gp =  gp;
 		m_tile = new Tile[m_maxTiles];
-		m_mapTileNum = new int[gp.MAX_SCREEN_COL][gp.MAX_SCREE_ROW];
+		m_mapTileNum = new int[gp.MAX_WORLD_COL][gp.MAX_WORLD_ROW];
 		this.getTileImage();
 		this.newRandomMap();
 	}
@@ -64,8 +64,8 @@ public class TileManager {
 	public void newRandomMap() {
 		Random rand = new Random();
 		double fondProba = 0.97;
-		for (int row = 0; row < m_gp.MAX_SCREE_ROW; row++) {
-	        for (int col = 0; col < m_gp.MAX_SCREEN_COL; col++) {
+		for (int row = 0; row < m_gp.MAX_WORLD_ROW; row++) {
+	        for (int col = 0; col < m_gp.MAX_WORLD_COL; col++) {
 	            double roll = rand.nextDouble();
 	            if (roll < fondProba) {
 	                m_mapTileNum[col][row] = 0;
@@ -84,21 +84,22 @@ public class TileManager {
 		int col = 0;
 		int row = 0;
 		int x = 0;
-		int y = 0;
+		int y =m_gp.m_position;
 		
-		while (col < m_gp.MAX_SCREEN_COL && row < m_gp.MAX_SCREE_ROW) {
+		while (col < m_gp.MAX_WORLD_COL && row < m_gp.MAX_WORLD_ROW) {
 			int tileNum = m_mapTileNum[col][row];
 			
 			g2.drawImage(m_tile[tileNum].m_image, x, y, m_gp.TILE_SIZE, m_gp.TILE_SIZE, null);
 			col ++;
 			x += m_gp.TILE_SIZE;
-			if (col == m_gp.MAX_SCREEN_COL) {
+			if (col == m_gp.MAX_WORLD_COL) {
 				col = 0;
 				row ++;
 				x = 0;
 				y += m_gp.TILE_SIZE;
 			}
 		}
+		m_gp.m_position+=5;
 		
 	}
 }
