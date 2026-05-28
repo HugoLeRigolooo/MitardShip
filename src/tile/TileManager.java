@@ -1,11 +1,8 @@
 package tile;
 
 import java.awt.Graphics2D;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
+import java.util.Random;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
@@ -30,7 +27,7 @@ public class TileManager {
 		m_tile = new Tile[m_maxTiles];
 		m_mapTileNum = new int[gp.MAX_SCREEN_COL][gp.MAX_SCREE_ROW];
 		this.getTileImage();
-		this.loadMap("/maps/map2.txt");
+		this.newRandomMap();
 	}
 	
 	/**
@@ -39,22 +36,22 @@ public class TileManager {
 	public void getTileImage() {
 		try {
 			m_tile[0] = new Tile();
-			m_tile[0].m_image = ImageIO.read(getClass().getResource("/tiles/GRASS.png"));
+			m_tile[0].m_image = ImageIO.read(getClass().getResource("/tiles/fond.png"));
 			
 			m_tile[1] = new Tile();
-			m_tile[1].m_image = ImageIO.read(getClass().getResource("/tiles/BRICK2.png"));
+			m_tile[1].m_image = ImageIO.read(getClass().getResource("/tiles/etoile4.png"));
 			
 			m_tile[2] = new Tile();
-			m_tile[2].m_image = ImageIO.read(getClass().getResource("/tiles/WATER.png"));
+			m_tile[2].m_image = ImageIO.read(getClass().getResource("/tiles/etoile5.png"));
 			
 			m_tile[3] = new Tile();
-			m_tile[3].m_image = ImageIO.read(getClass().getResource("/tiles/LAVA.png"));
+			m_tile[3].m_image = ImageIO.read(getClass().getResource("/tiles/etoile6.png"));
 			
 			m_tile[4] = new Tile();
-			m_tile[4].m_image = ImageIO.read(getClass().getResource("/tiles/SAND.png"));
+			m_tile[4].m_image = ImageIO.read(getClass().getResource("/tiles/etoile10.png"));
 			
 			m_tile[5] = new Tile();
-			m_tile[5].m_image = ImageIO.read(getClass().getResource("/tiles/SNOW.png"));
+			m_tile[5].m_image = ImageIO.read(getClass().getResource("/tiles/etoile12.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -64,35 +61,19 @@ public class TileManager {
 	/**
 	 * Lecture du fichier txt contenant la map et chargement des tuiles correspondantes.
 	 */
-	public void loadMap(String filePath) {
-		//charger le fichier txt de la map
-		try {
-			
-			InputStream is = getClass().getResourceAsStream(filePath);
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		
-			int col = 0;
-			int row = 0;
-			
-			// Parcourir le fichier txt pour r�cup�rer les valeurs
-			while (col < m_gp.MAX_SCREEN_COL && row < m_gp.MAX_SCREE_ROW) {
-				String line = br.readLine();
-				while (col < m_gp.MAX_SCREEN_COL) {
-					String numbers[] = line.split(" ");
-					int num = Integer.parseInt(numbers[col]);
-					m_mapTileNum [col][row] = num;
-					col++;
-				}
-				if (col == m_gp.MAX_SCREEN_COL) {
-					col = 0;
-					row ++;
-				}
-			}
-			
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void newRandomMap() {
+		Random rand = new Random();
+		double fondProba = 0.97;
+		for (int row = 0; row < m_gp.MAX_SCREE_ROW; row++) {
+	        for (int col = 0; col < m_gp.MAX_SCREEN_COL; col++) {
+	            double roll = rand.nextDouble();
+	            if (roll < fondProba) {
+	                m_mapTileNum[col][row] = 0;
+	            } else {
+	                m_mapTileNum[col][row] = rand.nextInt(5) + 1;
+	            }
+	        }
+	    }
 	}
 	
 	/**
