@@ -3,11 +3,14 @@ package entity;
 import java.awt.image.BufferedImage;
 
 /**
- * Entité de base du jeu
+ * Entitï¿½ de base du jeu
  *
  */
 public abstract class Entity {
 	public int m_x, m_y;				//position sur la map
-	public int m_speed;					//Déplacement de l'entité
-	public BufferedImage m_idleImage;	//Une image de l'entité
+	public int m_speed;					//Dï¿½placement de l'entitï¿½
+	public BufferedImage m_idleImage;	//Une image de l'entitï¿½
+	public boolean m_collision_ennemi;		//Indique si l'entitï¿½ est en collision avec une autre entitï¿½
+	public boolean m_collision_projectile;	//Indique si l'entitï¿½ est en collision avec un projectile
+	public int vie;						//Vie de l'entitï¿½
 }
