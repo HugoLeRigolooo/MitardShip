@@ -34,8 +34,6 @@ public class Player extends Entity {
 		m_cooldownTir = 0;   
 		m_cadenceTir = 10;
 		
-        
-
         getVieImage();
     }
 

@@ -15,6 +15,7 @@ public abstract class ProjectileBase extends Entity{
 	int m_speed;
 	
 	boolean en_collision; //si le projectile a une collision se met sur true donc le projectile ne s'affiche plus
+	int m_speed;
 
 
 	/**
@@ -33,7 +34,7 @@ public abstract class ProjectileBase extends Entity{
 	}
 	
 	
-	protected abstract void setDefaultValues();
+
 	
 	/**
 	 * R�cup�ration de l'image de projectile
