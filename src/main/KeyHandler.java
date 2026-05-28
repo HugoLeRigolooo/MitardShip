@@ -3,12 +3,14 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import tile.TileManager;
+
 /**
  * Gestionnaire d'�v�nements (touche clavier)
  *
  */
 public class KeyHandler implements KeyListener{
-	public boolean upPressed, downPressed, leftPressed, rightPressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, spacePressed;
 	public GamePanel m_gp;
 	
 	KeyHandler(GamePanel gp){
@@ -32,6 +34,8 @@ public class KeyHandler implements KeyListener{
         	if (code==KeyEvent.VK_ENTER) {
         		if (m_gp.m_gameover.commandNum==0) {
         			m_gp.m_gameState=m_gp.playState;
+        			m_gp.m_position=-(m_gp.MAX_WORLD_ROW * m_gp.TILE_SIZE) + m_gp.SCREEN_HEIGHT;
+        			m_gp.m_tileM = new TileManager(m_gp);
         		}else {
         			System.exit(0);
         		}
