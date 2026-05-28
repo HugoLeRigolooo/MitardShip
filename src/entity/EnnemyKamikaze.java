@@ -15,6 +15,7 @@ public class EnnemyKamikaze extends Ennemy {
 
 	int m_target_x;
 	int m_target_y;
+	int scoreValue;
 	/**
 	 * Constructeur de Player
 	 * @param a_gp GamePanel, pannel principal du jeu
@@ -28,6 +29,8 @@ public class EnnemyKamikaze extends Ennemy {
 		this.getEnnemyImage();
 		m_target_x = r.nextInt(m_gp.SCREEN_WIDTH+1);
 		m_target_y = m_gp.SCREEN_HEIGHT;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public void update_move() {

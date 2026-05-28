@@ -47,8 +47,12 @@ public abstract class Ennemy extends Entity {
 		m_y=m_init_y=y;
 		m_speed = 2;
 		this.getEnnemyImage();
+
 		m_typeTir = type_tire;
 		m_cadenceTir= cadenceTir;
+		listEnnemy.add(this);
+		this.m_projectiles = new ArrayList<>();
+
 	}
 	
 	public Ennemy(GamePanel a_gp, int x, int y, int speed, int type_tire, int cadenceTir) {
@@ -59,6 +63,8 @@ public abstract class Ennemy extends Entity {
 		this.getEnnemyImage();
 		m_typeTir = type_tire;
 		m_cadenceTir= cadenceTir;
+		listEnnemy.add(this);
+		this.m_projectiles = new ArrayList<>();
 	}
 	
 	int getVie() {
@@ -112,6 +118,14 @@ public abstract class Ennemy extends Entity {
 			projectile.update();
 		}
 	}
+	int getX() {
+		return m_x;
+	}
+
+	int getY() {
+		return m_y;
+	}
+	
 	
 	public void tirer() {
 		if (m_typeTir==1) {
@@ -135,6 +149,6 @@ public abstract class Ennemy extends Entity {
 		// r�cup�re l'image du joueur
 		BufferedImage l_image = m_idleImage;
 		// affiche le personnage avec l'image "image", avec les coordonn�es x et y, et de taille tileSize (16x16) sans �chelle, et 48x48 avec �chelle)
-		a_g2.drawImage(l_image, m_x, m_y, m_gp.TILE_SIZE, m_gp.TILE_SIZE, null);
+		a_g2.drawImage(l_image, m_x, m_y, m_gp.TILE_SIZE *6, m_gp.TILE_SIZE*6, null);
 	}
 }

@@ -16,6 +16,7 @@ public class EnnemyWaveHorizontal extends Ennemy {
 	int m_side;
 	int m_amp;
 	int m_dir;
+	int scoreValue;
 	/**
 	 * Constructeur de Player
 	 * @param a_gp GamePanel, pannel principal du jeu
@@ -30,6 +31,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_amp=50;
 		m_dir=0;
 		m_side=0;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp, int type_tire) {
@@ -40,6 +43,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_amp=amp;
 		m_dir=0;
 		m_side=0;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp, int dir, int typeTir, int cadenceTir) {
@@ -50,6 +55,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_side = r.nextInt(2);
 		m_amp=amp;
 		m_dir=dir;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyWaveHorizontal(GamePanel a_gp, int x, int y, int speed, int amp, int dir, int side, int typeTir, int cadenceTir) {
@@ -60,6 +67,8 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		m_side = side;
 		m_amp=amp;
 		m_dir=dir;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyWaveHorizontal(GamePanel a_gp, int typeTir, int cadenceTir) {
@@ -69,6 +78,7 @@ public class EnnemyWaveHorizontal extends Ennemy {
 		this.getEnnemyImage();
 		m_side = r.nextInt(2);
 		m_amp = m_gp.SCREEN_HEIGHT/8;
+		vie = 20;
 	}
 	
 	public void update_move() {

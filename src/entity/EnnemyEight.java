@@ -15,6 +15,7 @@ public class EnnemyEight extends Ennemy {
 
 	int m_amp;
 	double m_timer;
+	int scoreValue;
 	/**
 	 * Constructeur de Player
 	 * @param a_gp GamePanel, pannel principal du jeu
@@ -26,6 +27,8 @@ public class EnnemyEight extends Ennemy {
 		m_amp=amp;
 		this.getEnnemyImage();
 		m_timer=0;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyEight(GamePanel a_gp, int x, int y, int speed, int typeTir, int cadenceTir) {
@@ -33,6 +36,8 @@ public class EnnemyEight extends Ennemy {
 		m_amp=50;
 		this.getEnnemyImage();
 		m_timer=0;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public EnnemyEight(GamePanel a_gp, int typeTir, int cadenceTir) {
@@ -40,6 +45,8 @@ public class EnnemyEight extends Ennemy {
 		m_amp=50;
 		this.getEnnemyImage();
 		m_timer=0;
+		scoreValue = 10;
+		vie = 20;
 	}
 	
 	public void update_move() {

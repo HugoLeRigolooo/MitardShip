@@ -33,8 +33,6 @@ public class Player extends Entity {
 		m_cooldownTir = 0;   
 		m_cadenceTir = 10;
 		
-        
-
         getVieImage();
     }
 
@@ -149,6 +147,14 @@ public class Player extends Entity {
 			}
 		}
     }
+	int getX() {
+		return m_x;
+	}
+
+	int getY() {
+		return m_y;
+	}
+	
 
     public void draw(Graphics2D a_g2) {
     	for (int i = 0; i < m_projectiles.size(); i++) {
@@ -160,12 +166,5 @@ public class Player extends Entity {
         }
     }
 	
-	int getX() {
-		return m_x;
-	}
 
-	int getY() {
-		return m_y;
-	}
-	
 }
