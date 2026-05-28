@@ -131,7 +131,6 @@ public class TileManager {
 				y += m_gp.TILE_SIZE;
 			}
 		}
-		m_gp.m_position+=2;
 		
 	}
 }

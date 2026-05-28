@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Player m_player;
 	Ennemy m_e;
 	TileManager m_tileM;
+	GameOver m_gameover;
 	
 	public int m_position; //position de la caméra
 	public int score; //score du joueur
@@ -50,21 +51,22 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int pauseState = 2;
 	public final int gameOverState = 3;
 	public int m_gameState; // État du jeu
+	public int compteur; //pour bouton menu gameover
 		
 	/**
 	 * Constructeur
 	 */
 	public GamePanel() {
 		m_FPS = 60;				
-		m_keyH = new KeyHandler();
+		m_keyH = new KeyHandler(this);
 		m_player = new Player(this, m_keyH);
 		m_e = new EnnemyBase(this,300,180);
 		m_tileM = new TileManager(this);
 		m_position=-(MAX_WORLD_ROW * TILE_SIZE) + SCREEN_HEIGHT;
 		m_gameState=playState; //temporaire mais faut commencer par start
-		score = 0;
+		m_gameover=new GameOver(this, m_keyH);
 		
-		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+		this.setPreferredSize(new Dimension(SCREEN_WIDTH+30, SCREEN_HEIGHT)); //+30 : Place pour la barre de progression
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(m_keyH);
@@ -114,13 +116,27 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
-
+	public void drawProgression(Graphics2D g2) {
+		int hauteur=SCREEN_HEIGHT-25;
+		int largeur=10;
+		int x=SCREEN_WIDTH+5;
+		int y=10;
+		g2.setColor(Color.WHITE);
+		g2.drawRect(x, y, largeur, hauteur);
+		g2.setColor(Color.YELLOW);
+		double hauteur_avancer=((((double) TILE_SIZE*(double) MAX_WORLD_ROW)+m_position)*(double) hauteur)/((double) TILE_SIZE*(double) MAX_WORLD_ROW);
+		g2.fillRect(x+1, ((int) hauteur+y)-(int) hauteur_avancer, largeur-1, (int) hauteur_avancer);
+	}
+	
+	
 	/**
 	 * Mise � jour des donn�es des entit�s
 	 */
 	public void update() {
-		m_player.update();
-		m_e.update();
+		if (m_gameState==playState) {
+			m_player.update();
+			m_position+=5;
+		}
 	}
 	
 	/**
@@ -132,10 +148,16 @@ public class GamePanel extends JPanel implements Runnable{
 		if (m_gameState==playState){
 			m_tileM.draw(g2);
 			m_player.draw(g2);
+			drawProgression(g2);
 			m_e.draw(g2);
 
 			g2.setColor(Color.WHITE);
 			g2.drawString("Score: " + score, 50, 50);
+		}else if(m_gameState==gameOverState) {
+			m_tileM.draw(g2);
+			m_player.draw(g2);
+			drawProgression(g2);
+			m_gameover.draw(g2);
 		}
 		g2.dispose();
 	}
