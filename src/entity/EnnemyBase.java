@@ -20,14 +20,14 @@ public class EnnemyBase extends Ennemy {
 	 * @param a_gp GamePanel, pannel principal du jeu
 	 * @param a_keyH KeyHandler, gestionnaire des touches 
 	 */
-	public EnnemyBase(GamePanel a_gp) {
+	public EnnemyBase(GamePanel a_gp, int y_depart, int y_target) {
 		super(a_gp);
 		Random r = new Random();
-		this.m_gp = a_gp;
 		this.setDefaultValues();
+		m_y=y_depart;
 		this.getEnnemyImage();
 		m_target_x = r.nextInt(m_gp.SCREEN_WIDTH+1);
-		m_target_y = m_gp.SCREEN_HEIGHT;
+		m_target_y = y_target;
 	}
 	
 	public void update() {
