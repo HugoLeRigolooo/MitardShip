@@ -23,7 +23,6 @@ public class GameOver {
     GamePanel gp;
     public int commandNum = 0;
     public boolean win=true;
-    public int m_score;
     KeyHandler m_keyH;
     Font pixelFont;
     
@@ -31,7 +30,6 @@ public class GameOver {
     public GameOver(GamePanel gp, KeyHandler a_keyH) {
         this.gp = gp;
         this.m_keyH = a_keyH;
-        this.m_score=0;
         
        try {
            InputStream is = getClass().getResourceAsStream("/fonts/04B_30__.ttf");
@@ -59,16 +57,20 @@ public class GameOver {
         int x = 0;
         int y = gp.SCREEN_HEIGHT / 4;
         if (win) {
-        	text = "MISSION TERMINÉE";
+        	text = "MISSION TERMINEE";
         	x = getXforCenteredText(text, g2);
             g2.drawString(text, x, y);
-            text = "SCORE : "+m_score;
+            text = "SCORE : "+gp.score;
             x = getXforCenteredText(text, g2);
-            y += gp.TILE_SIZE * 3;
+            y += gp.TILE_SIZE * 3 + 100;
             g2.drawString(text, x, y);
         }else {
         	text = "GAME OVER";
         	x = getXforCenteredText(text, g2);
+            g2.drawString(text, x, y);
+            text = "SCORE : "+gp.score;
+            x = getXforCenteredText(text, g2);
+            y += gp.TILE_SIZE * 3 + 100;
             g2.drawString(text, x, y);
         }
         

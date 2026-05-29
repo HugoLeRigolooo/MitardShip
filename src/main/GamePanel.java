@@ -155,8 +155,8 @@ public class GamePanel extends JPanel implements Runnable{
 	      
 	        Rectangle hitboxEnnemi = new Rectangle(ennemy.getX(), ennemy.getY(), tailleHitbox, tailleHitbox);
 	        if (hitboxEnnemi.intersects(hitboxJoueur)) {
-	        	 this.m_gameState = gameOverState;
-	        	
+	        	this.m_gameState = gameOverState;
+	        	this.m_gameover.win = false;
 	        }
 	        
 	        for (int j = tirsJoueur.size() - 1; j >= 0; j--) {
@@ -207,8 +207,8 @@ public class GamePanel extends JPanel implements Runnable{
 	                System.out.println("Joueur touché ! Vie restante : " + m_player.getVie());
 	               
 	                if (m_player.getVie() <= 0) {
-	                	 this.m_gameState = gameOverState;
-	
+	                	this.m_gameState = gameOverState;
+						this.m_gameover.win = false;
 	                }
 	            }
 

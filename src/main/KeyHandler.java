@@ -70,6 +70,7 @@ public class KeyHandler implements KeyListener {
         			m_gp.vague7=false;
 
                     entity.Ennemy.listEnnemy.clear();
+                    
 
                     
                     m_gp.m_player.setDefaultValues();
