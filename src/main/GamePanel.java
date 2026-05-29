@@ -189,12 +189,6 @@ public class GamePanel extends JPanel implements Runnable{
 			
 	    }
 
-	
-	    int tailleHitbox = TILE_SIZE * 4; 
-
-	    Rectangle hitboxJoueur = new Rectangle(m_player.getX(), m_player.getY(), tailleHitbox, tailleHitbox);
-	    
-	   
 	    for (Ennemy ennemy : Ennemy.listEnnemy) {
 	       
 	    	
