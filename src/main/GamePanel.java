@@ -8,8 +8,10 @@ import java.util.ArrayList;
 
 import entity.Ennemy;
 import entity.EnnemyBase;
+import entity.EnnemyBounce;
 import entity.EnnemyKamikaze;
 import entity.EnnemyVertical;
+import entity.EnnemyWaveHorizontal;
 import entity.EnnemyCircularVertical;
 import entity.EnnemyEight;
 import entity.Player;
@@ -34,9 +36,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int MAX_SCREEN_COL = 80;						// Nombre de tuile en longueur de l'ensemble affiché
 	public final int MAX_WORLD_COL= 160;							// Nombre de tuile en longueur de l'ensemble de la map
 	public final int MAX_SCREE_ROW = 60;							// Nombre de tuile en largeur de l'ensemble affiché
-	public final int MAX_WORLD_ROW= 300;							// Nombre de tuile en largeur de l'ensemble de la map
+	public final int MAX_WORLD_ROW= 1200;							// Nombre de tuile en largeur de l'ensemble de la map
 	public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
 	public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREE_ROW;	// 576 pixels
+	public final int MAP_SIZE = MAX_WORLD_ROW*TILE_SIZE;
 
 	// FPS : taux de rafraichissement
 	int m_FPS;
@@ -44,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// Cr�ation des diff�rentes instances (Player, KeyHandler, TileManager, GameThread ...)
 	KeyHandler m_keyH;
 	Thread m_gameThread;
-	Player m_player;
+	public Player m_player;
 	TileManager m_tileM;
 	public Menu m_menu;
 	public GameOver m_gameover;
@@ -59,7 +62,19 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int gameOverState = 3;
 	public int m_gameState; // État du jeu
 	public int compteur; //pour bouton menu gameover
+
 	public ArrayList<Bonus> m_bonusList = new ArrayList<>();
+
+	
+	//bool_vague
+	
+	boolean vague1;
+	boolean vague2;
+	boolean vague3;
+	boolean vague4;
+	boolean vague5;
+	boolean vague6;
+	boolean vague7;
 		
 	/**
 	 * Constructeur
@@ -129,6 +144,10 @@ public class GamePanel extends JPanel implements Runnable{
 	
 
 	public void checkCollisions() {
+		 int tailleHitbox = TILE_SIZE * 4; 
+
+
+		 Rectangle hitboxJoueur = new Rectangle(m_player.getX(), m_player.getY(), tailleHitbox, tailleHitbox);
 	    
 		ArrayList<ProjectilePlayer> tirsJoueur = m_player.getProjectiles();
 	    
@@ -137,8 +156,11 @@ public class GamePanel extends JPanel implements Runnable{
 	        Ennemy ennemy = Ennemy.listEnnemy.get(i);
 	        
 	      
-	        Rectangle hitboxEnnemi = new Rectangle(ennemy.getX(), ennemy.getY(), TILE_SIZE, TILE_SIZE);
-	        
+	        Rectangle hitboxEnnemi = new Rectangle(ennemy.getX(), ennemy.getY(), tailleHitbox, tailleHitbox);
+	        if (hitboxEnnemi.intersects(hitboxJoueur)) {
+	        	 this.m_gameState = gameOverState;
+	        	
+	        }
 	        
 	        for (int j = tirsJoueur.size() - 1; j >= 0; j--) {
 	            ProjectilePlayer pPlayer = tirsJoueur.get(j);
@@ -160,7 +182,7 @@ public class GamePanel extends JPanel implements Runnable{
 						Ennemy.listEnnemy.remove(i);
 					}
 	                
-	                break; // On sort de la boucle des projectiles car cet ennemi a déjà été géré pour cette frame
+	                break; 
 	            }
 	        }
 
@@ -235,6 +257,58 @@ public class GamePanel extends JPanel implements Runnable{
 		g2.fillRect(x+1, ((int) hauteur+y)-(int) hauteur_avancer, largeur-1, (int) hauteur_avancer);
 	}
 	
+public void spawnEnemies() {
+		if (!vague1 && m_position > -13000) {
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 2* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 3* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 2* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 3* TILE_SIZE, 0, 1, 1, 80);
+			vague1 = true;
+		}
+		
+		if (!vague2 && m_position > -11500) {
+			new EnnemyWaveHorizontal(this, SCREEN_WIDTH / 4, 0, 3, 100, 1, 0, 1, 60);
+			new EnnemyWaveHorizontal(this, 3 * SCREEN_WIDTH / 4, -0, 3, 100, 1, 0, 1, 60);
+			vague2 = true;
+		}
+		
+		if (!vague3 && m_position > -10000) {
+			new EnnemyBounce(this, 50, 0, 4, 2, 1, 70);
+			new EnnemyBounce(this, SCREEN_WIDTH - 50, 0, -4, 2, 1, 70);
+			new EnnemyBounce(this, SCREEN_WIDTH / 2, 0, 5, 3, 1, 70);
+			vague3 = true;
+		}
+
+		if (!vague4 && m_position > -8500) {
+			new EnnemyEight(this, SCREEN_WIDTH / 2, 100, 2, 80, 1, 50);
+			new EnnemyKamikaze(this, SCREEN_WIDTH / 6, -100, 2, 1, 90);
+			new EnnemyKamikaze(this, 5 * SCREEN_WIDTH / 6, -100, 2, 1, 90);
+			vague4 = true;
+		}
+
+		if (!vague5 && m_position > -7000) {
+			new EnnemyCircularVertical(this, SCREEN_WIDTH / 3, 0, 3, 50, 2, 40);
+			new EnnemyCircularVertical(this, 2 * SCREEN_WIDTH / 3, 0, 3, 50, 2, 40);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2, 0, 4, 1, 50);
+			vague5 = true;
+		}
+
+		if (!vague6 && m_position > -5500) {
+			new EnnemyBase(this, 0, 5, 1, 40);
+			new EnnemyBase(this, 0, 5, 1, 40);
+			new EnnemyBase(this, 0, 5, 1, 40);
+			new EnnemyWaveHorizontal(this, SCREEN_WIDTH / 2, 0, 4, 150, 1, 0, 2, 40);
+			vague6 = true;
+		}
+
+		if (!vague7 && m_position > -3000) {
+			new EnnemyKamikaze(this, SCREEN_WIDTH / 4, -50, 3, 2, 50);
+			new EnnemyKamikaze(this, SCREEN_WIDTH / 2, -150, 3, 2, 50);
+			new EnnemyKamikaze(this, 3 * SCREEN_WIDTH / 4, -50, 3, 2, 50);
+			new EnnemyBounce(this, 0, -250, 6, 4, 1, 20);
+			vague7 = true;
+		}
+	}
 	
 
 	/**
@@ -251,6 +325,7 @@ public class GamePanel extends JPanel implements Runnable{
 			
 			m_player.update();
 			m_position+=5;
+			spawnEnemies();
 		}
 	}
 	

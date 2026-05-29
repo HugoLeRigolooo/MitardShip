@@ -49,4 +49,13 @@ public class EnnemyCircularVertical extends Ennemy {
 	    m_y = (int) (m_init_y + m_radius * Math.sin(m_angle));
 		
 	}
+	@Override
+	public void getEnnemyImage() {
+		//gestion des expections 
+		try {
+			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

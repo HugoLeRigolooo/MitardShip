@@ -22,12 +22,17 @@ import java.io.InputStream;
 public class GameOver {
     GamePanel gp;
     public int commandNum = 0;
+    public boolean win=true;
+    public int m_score;
     KeyHandler m_keyH;
     Font pixelFont;
+    
 
     public GameOver(GamePanel gp, KeyHandler a_keyH) {
         this.gp = gp;
         this.m_keyH = a_keyH;
+        this.m_score=0;
+        
        try {
            InputStream is = getClass().getResourceAsStream("/fonts/04B_30__.ttf");
            if (is == null) {
@@ -41,18 +46,31 @@ public class GameOver {
            // Solution de secours (Fallback) pour que le jeu ne crash pas
            pixelFont = new Font("Arial", Font.BOLD, 30);
        }
+        
+
     }
     
     public void draw(Graphics2D g2) {
         g2.setColor(new Color(0, 0, 0, 150));
         g2.fillRect(0, 0, gp.SCREEN_WIDTH, gp.SCREEN_HEIGHT);
         g2.setFont(pixelFont.deriveFont(Font.BOLD, 50F));
-        String text = "MISSION TERMINEE";
         g2.setColor(Color.WHITE);
-        
-        int x = getXforCenteredText(text, g2);
+        String text="";
+        int x = 0;
         int y = gp.SCREEN_HEIGHT / 4;
-        g2.drawString(text, x, y);
+        if (win) {
+        	text = "MISSION TERMINÉE";
+        	x = getXforCenteredText(text, g2);
+            g2.drawString(text, x, y);
+            text = "SCORE : "+m_score;
+            x = getXforCenteredText(text, g2);
+            y += gp.TILE_SIZE * 3;
+            g2.drawString(text, x, y);
+        }else {
+        	text = "GAME OVER";
+        	x = getXforCenteredText(text, g2);
+            g2.drawString(text, x, y);
+        }
         
         g2.setFont(pixelFont.deriveFont(Font.BOLD, 30F));
         text = "REJOUER";

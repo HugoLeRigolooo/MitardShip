@@ -59,6 +59,13 @@ public class KeyHandler implements KeyListener {
         			m_gp.m_gameState=m_gp.playState;
         			m_gp.m_position=-(m_gp.MAX_WORLD_ROW * m_gp.TILE_SIZE) + m_gp.SCREEN_HEIGHT;
         			m_gp.m_tileM = new TileManager(m_gp);
+        			m_gp.vague1=false;
+        			m_gp.vague2=false;
+        			m_gp.vague3=false;
+        			m_gp.vague4=false;
+        			m_gp.vague5=false;
+        			m_gp.vague6=false;
+        			m_gp.vague7=false;
         		}else {
         			System.exit(0);
         		}

@@ -48,6 +48,7 @@ public abstract class Ennemy extends Entity {
 		m_speed = 2;
 		this.getEnnemyImage();
 
+
 		m_typeTir = type_tire;
 		m_cadenceTir= cadenceTir;
 		listEnnemy.add(this);
@@ -114,8 +115,14 @@ public abstract class Ennemy extends Entity {
 				tirer();
 				m_cooldownTir = m_cadenceTir; 
 		}
-		for (ProjectileBase projectile : m_projectiles) {
-			projectile.update();
+		for (int i = m_projectiles.size() - 1; i >= 0; i--) {
+			ProjectileEnnemy p = m_projectiles.get(i);
+			p.update();
+			
+
+			if (p.getY() < -m_gp.TILE_SIZE) {
+				m_projectiles.remove(i);
+			}
 		}
 	}
 	public int getX() {

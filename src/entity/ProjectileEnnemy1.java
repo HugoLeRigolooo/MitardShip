@@ -9,10 +9,12 @@ import main.GamePanel;
 public class ProjectileEnnemy1 extends ProjectileEnnemy {
 	public ProjectileEnnemy1 (GamePanel a_gp, Ennemy e, int degat, int speed) {
 		super(a_gp,e, degat, speed);
+
 	}
 	
 	public ProjectileEnnemy1 (GamePanel a_gp, Ennemy e) {
 		super(a_gp,e, 20, 8);
+
 	}
 	
 	
