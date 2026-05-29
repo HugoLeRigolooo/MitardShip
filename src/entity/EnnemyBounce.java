@@ -2,6 +2,10 @@ package entity;
 
 
 
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import main.GamePanel;
 
 public class EnnemyBounce extends Ennemy {
@@ -43,6 +47,16 @@ public class EnnemyBounce extends Ennemy {
 		if (m_x<0) {
 			m_x= 0;
 			m_speed_x=-m_speed_x;
+		}
+	}
+	
+	@Override
+	public void getEnnemyImage() {
+		//gestion des expections 
+		try {
+			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

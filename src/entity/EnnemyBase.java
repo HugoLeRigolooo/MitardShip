@@ -4,8 +4,10 @@ package entity;
 
 import main.GamePanel;
 
-
+import java.io.IOException;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 public class EnnemyBase extends Ennemy {
 
@@ -49,5 +51,18 @@ public class EnnemyBase extends Ennemy {
 		m_y += m_speed * (dy/distance);			
 		m_x += m_speed * (dx/distance);
 		
+	}
+	
+	/**
+	 * R�cup�ration de l'image du personnage
+	 */
+	@Override
+	public void getEnnemyImage() {
+		//gestion des expections 
+		try {
+			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

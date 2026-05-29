@@ -96,4 +96,14 @@ public class EnnemyWaveHorizontal extends Ennemy {
 			m_y += m_speed;
 		}
 	}
+	
+	@Override
+	public void getEnnemyImage() {
+		//gestion des expections 
+		try {
+			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -172,6 +172,4 @@ public class Player extends Entity {
             a_g2.drawImage(m_idleImageVie, 10, 10, m_gp.TILE_SIZE * 9, m_gp.TILE_SIZE * 3, null);
         }
     }
-
-	
 }

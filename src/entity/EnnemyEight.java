@@ -54,4 +54,14 @@ public class EnnemyEight extends Ennemy {
 	    m_x = (int) (m_init_x + 3* m_amp * Math.sin(m_speed * m_timer));
 	    m_y = (int) (m_init_y + m_amp * Math.sin(m_speed * m_timer * 2));
 	}
+	
+	@Override
+	public void getEnnemyImage() {
+		//gestion des expections 
+		try {
+			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

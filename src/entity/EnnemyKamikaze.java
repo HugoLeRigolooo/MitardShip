@@ -13,32 +13,64 @@ import java.util.Random;
 
 public class EnnemyKamikaze extends Ennemy {
 
-	int m_target_x;
-	int m_target_y;
-	int scoreValue;
-	/**
-	 * Constructeur de Player
-	 * @param a_gp GamePanel, pannel principal du jeu
-	 * @param a_keyH KeyHandler, gestionnaire des touches 
-	 */
-	public EnnemyKamikaze(GamePanel a_gp, int typeTir, int cadenceTir) {
-		super(a_gp,typeTir, cadenceTir);
-		Random r = new Random();
-		this.m_gp = a_gp;
-		this.setDefaultValues();
-		this.getEnnemyImage();
-		m_target_x = r.nextInt(m_gp.SCREEN_WIDTH+1);
-		m_target_y = m_gp.SCREEN_HEIGHT;
-		scoreValue = 10;
-		vie = 20;
-	}
-	
-	public void update_move() {
-		double dx = m_target_x-m_init_x;
-		double dy = m_target_y-m_init_y;
-		double distance = Math.sqrt(dx * dx + dy * dy);
-		m_y += m_speed * (dy/distance);			
-		m_x += m_speed * (dx/distance);
-		
+    private boolean m_sprint;
+    private int m_normalSpeed;
+    private int m_sprintSpeed;
+    private int scoreValue;
+
+    public EnnemyKamikaze(GamePanel a_gp, int x, int y, int typeTir, int cadenceTir) {
+        super(a_gp, x, y, 2, typeTir, cadenceTir); 
+        this.getEnnemyImage();
+        this.scoreValue = 15;
+        this.m_vie = 15;
+        
+        this.m_normalSpeed = 2;
+        this.m_sprintSpeed = 12;
+        this.m_sprint = false;
+    }
+    
+    public EnnemyKamikaze(GamePanel a_gp, int x, int y, int speed, int typeTir, int cadenceTir) {
+        super(a_gp, x, y, speed, typeTir, cadenceTir);
+        this.getEnnemyImage();
+        this.scoreValue = 15;
+        this.m_vie = 15;
+        
+        this.m_normalSpeed = speed;
+        this.m_sprintSpeed = speed * 4;
+        this.m_sprint = false;
+    }
+
+    @Override
+    public void update_move() {
+        if (!m_sprint) {
+            int playerX = m_gp.m_player.getX();
+            int playerY = m_gp.m_player.getY();
+            
+            int playerWidth = m_gp.TILE_SIZE * 6; 
+            int ennemyWidth = m_gp.TILE_SIZE;
+
+            boolean isAligned = (m_x + ennemyWidth >= playerX) && (m_x <= playerX + playerWidth);
+            
+            boolean isAbovePlayer = m_y < playerY;
+
+            if (isAligned && isAbovePlayer) {
+                m_sprint = true;
+            }
+        }
+
+        if (m_sprint) {
+            m_y += m_sprintSpeed;
+        } else {
+            m_y += m_normalSpeed;
+        }
+    }
+    @Override
+	public void getEnnemyImage() {
+		//gestion des expections 
+		try {
+			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
