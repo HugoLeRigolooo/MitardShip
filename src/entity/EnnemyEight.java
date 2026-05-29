@@ -59,7 +59,7 @@ public class EnnemyEight extends Ennemy {
 	public void getEnnemyImage() {
 		//gestion des expections 
 		try {
-			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_1.png"));
+			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_4.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
