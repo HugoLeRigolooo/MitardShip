@@ -185,8 +185,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 			
 	    }
-	    
-	   
+
 	    for (Ennemy ennemy : Ennemy.listEnnemy) {
 	       
 	    	
