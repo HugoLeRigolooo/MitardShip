@@ -39,6 +39,7 @@ public class EnnemyBase extends Ennemy {
 		m_target_y = m_y + m_gp.SCREEN_HEIGHT;
 		m_cooldownTir = 0;
 		m_speed = speed;
+		m_vie =50;
 	}
 	
 	public void update_move() {
@@ -47,5 +48,6 @@ public class EnnemyBase extends Ennemy {
 		double distance = Math.sqrt(dx * dx + dy * dy);
 		m_y += m_speed * (dy/distance);			
 		m_x += m_speed * (dx/distance);
+		
 	}
 }

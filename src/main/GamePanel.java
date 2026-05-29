@@ -227,11 +227,11 @@ public class GamePanel extends JPanel implements Runnable{
 	public void spawnEnemies() {
 		
 			if (!vague1 && m_position>-1900) {
-				new EnnemyBase(this, 0, 5, 1, 40);
-				new EnnemyBase(this, 0, 5, 1, 40);
-				new EnnemyBase(this, 0, 5, 1, 40);
-				new EnnemyBase(this, 0, 5, 1, 40);
-				new EnnemyBase(this, 0, 5, 1, 40);
+				new EnnemyBase(this, 0, 2, 1, 40);
+				new EnnemyBase(this, 0, 2, 1, 40);
+				new EnnemyBase(this, 0, 2, 1, 40);
+				new EnnemyBase(this, 0, 2, 1, 40);
+				new EnnemyBase(this, 0, 2, 1, 40);
 				vague1=true;
 			}
 			if (!vague2 && m_position>MAP_SIZE+SCREEN_HEIGHT*1){
