@@ -94,9 +94,6 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(m_keyH);
 		this.setFocusable(true);
-
-		
-		new EnnemyCircularVertical(this, 1, 1, 1, 50, 1, 60);
 	}
 	
 	/**
@@ -188,11 +185,6 @@ public class GamePanel extends JPanel implements Runnable{
 
 			
 	    }
-
-	
-	    int tailleHitbox = TILE_SIZE * 4; 
-
-	    Rectangle hitboxJoueur = new Rectangle(m_player.getX(), m_player.getY(), tailleHitbox, tailleHitbox);
 	    
 	   
 	    for (Ennemy ennemy : Ennemy.listEnnemy) {
@@ -200,10 +192,27 @@ public class GamePanel extends JPanel implements Runnable{
 	    	
 	    	ArrayList<ProjectileEnnemy>  tirsEnnemi = ennemy.getProjectiles(); 
 	        
+			
+
 	        for (int k = tirsEnnemi.size() - 1; k >= 0; k--) {
 	            ProjectileEnnemy pEnnemy = tirsEnnemi.get(k);
 	            
-	     
+				Rectangle hitboxProjectileEnnemy = new Rectangle(pEnnemy.getX(), pEnnemy.getY(), TILE_SIZE, TILE_SIZE);
+	           
+	           
+	            if (hitboxJoueur.intersects(hitboxProjectileEnnemy)) {
+	 
+	                m_player.setVie(pEnnemy.getDegat());
+	                tirsEnnemi.remove(k);           
+	               
+	                System.out.println("Joueur touché ! Vie restante : " + m_player.getVie());
+	               
+	                if (m_player.getVie() <= 0) {
+	                	 this.m_gameState = gameOverState;
+	
+	                }
+	            }
+
 	            Rectangle hitboxRamassage = new Rectangle(m_player.getX(), m_player.getY(), TILE_SIZE * 6, TILE_SIZE * 6);
 
 				for (int i = m_bonusList.size() - 1; i >= 0; i--) {

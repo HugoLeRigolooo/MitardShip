@@ -26,7 +26,7 @@ public class Player extends Entity {
 		this.m_projectiles = new ArrayList<>();
     }
 
-    protected void setDefaultValues() {
+    public void setDefaultValues() {
         m_x = m_gp.SCREEN_WIDTH / 2 - (m_gp.TILE_SIZE * 6) / 2;
         m_y = m_gp.SCREEN_HEIGHT - 100;
         m_speed = 4;
@@ -128,9 +128,8 @@ public class Player extends Entity {
             tileBottomRight == 7 || tileBottomRight == 8) {
             
             m_gp.m_gameState = m_gp.gameOverState;
-            // m_gp.m_gameover.win = true;
-            // m_gp.m_gameover.m_score = m_gp.score;
-            setDefaultValues();
+            m_gp.m_gameover.win = true;
+            m_gp.m_gameover.m_score = m_gp.score;
         }
         getVieImage();
         

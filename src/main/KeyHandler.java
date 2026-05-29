@@ -3,6 +3,8 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import entity.Ennemy;
+
 import tile.TileManager;
 
 public class KeyHandler implements KeyListener {
@@ -66,6 +68,11 @@ public class KeyHandler implements KeyListener {
         			m_gp.vague5=false;
         			m_gp.vague6=false;
         			m_gp.vague7=false;
+
+                    entity.Ennemy.listEnnemy.clear();
+
+                    
+                    m_gp.m_player.setDefaultValues();
         		}else {
         			System.exit(0);
         		}
