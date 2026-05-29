@@ -13,8 +13,6 @@ import java.util.Random;
 
 public class EnnemyVertical extends Ennemy {
 
-	int m_target_x;
-	int m_target_y;
 	int scoreValue;
 	/**
 	 * Constructeur de Player
@@ -25,24 +23,27 @@ public class EnnemyVertical extends Ennemy {
 	public EnnemyVertical(GamePanel a_gp, int x, int y,int typeTir, int cadenceTir) {
 		super(a_gp, x,y,2,typeTir, cadenceTir);
 		this.getEnnemyImage();
-		scoreValue = 10;
-		vie = 20;
+		scoreValue = 10;// supp mettre dans ennemy 
+		m_vie = 20;
 	}
 	
 	public EnnemyVertical(GamePanel a_gp, int x, int y, int speed,int typeTir, int cadenceTir) {
 		super(a_gp, x ,y, speed,typeTir ,cadenceTir );
 		this.getEnnemyImage();
 		scoreValue = 10;
-		vie = 20;
+		m_vie = 20;
 	}
 	
 	public void update_move() {
-		double dx = m_target_x-m_init_x;
-		double dy = m_target_y-m_init_y;
-		double distance = Math.sqrt(dx * dx + dy * dy);
-		m_y += m_speed * (dy/distance);			
-		m_x += m_speed * (dx/distance);
-		
+		m_y += m_speed;
 	}
-	
+	@Override
+	public void getEnnemyImage() {
+		//gestion des expections 
+		try {
+			m_idleImage = ImageIO.read(getClass().getResource("/ennemy/ennemy_1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
