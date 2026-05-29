@@ -17,7 +17,6 @@ public abstract class ProjectileBase extends Entity{
 	boolean en_collision; //si le projectile a une collision se met sur true donc le projectile ne s'affiche plus
 
 
-
 	/**
 	 * Constructeur de Player
 	 * @param a_gp GamePanel, pannel principal du jeu
