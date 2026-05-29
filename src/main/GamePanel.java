@@ -267,10 +267,18 @@ public class GamePanel extends JPanel implements Runnable{
 	
 public void spawnEnemies() {
 		if (!vague1 && m_position > -13000) {
-			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 2* TILE_SIZE, 0, 1, 1, 80);
-			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 3* TILE_SIZE, 0, 1, 1, 80);
-			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 2* TILE_SIZE, 0, 1, 1, 80);
-			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 3* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 10* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 15* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 20* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 25* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 30* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 + 35* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 10* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 15* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 20* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 25* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 30* TILE_SIZE, 0, 1, 1, 80);
+			new EnnemyVertical(this, SCREEN_WIDTH / 2 - 35* TILE_SIZE, 0, 1, 1, 80);
 			vague1 = true;
 		}
 		
