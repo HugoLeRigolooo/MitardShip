@@ -16,7 +16,7 @@ public class ProjectilePlayer1 extends ProjectilePlayer{
 		super(a_gp,p,5,8);
 	}
 	protected void setDefaultValues() {
-		m_x = m_p.getX();
+		m_x = m_p.getX()+30;
 		m_y = m_p.getY()+10;
 
 

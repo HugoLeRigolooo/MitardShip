@@ -129,7 +129,6 @@ public class Player extends Entity {
             
             m_gp.m_gameState = m_gp.gameOverState;
             m_gp.m_gameover.win = true;
-            m_gp.m_gameover.m_score = m_gp.score;
         }
         getVieImage();
         
