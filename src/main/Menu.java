@@ -76,6 +76,6 @@ public class Menu {
 
     private int getXForCenteredText(String text, Graphics2D g2) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        return m_gp.SCREEN_WIDTH / 2 - length / 2;
+        return (m_gp.SCREEN_WIDTH + 30) / 2 - length / 2;
     }
 }

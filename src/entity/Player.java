@@ -14,6 +14,7 @@ public class Player extends Entity {
 	ArrayList<ProjectilePlayer> m_projectiles;
 	private int m_cooldownTir; 
 	private int m_cadenceTir;
+    public int m_modeTir = 0;
 	
     BufferedImage m_idleImageVie;
 
@@ -32,6 +33,7 @@ public class Player extends Entity {
         vie = 100;
 		m_cooldownTir = 0;   
 		m_cadenceTir = 10;
+        m_gp.score = 0;
 		
         getVieImage();
     }
@@ -126,6 +128,8 @@ public class Player extends Entity {
             tileBottomRight == 7 || tileBottomRight == 8) {
             
             m_gp.m_gameState = m_gp.gameOverState;
+            // m_gp.m_gameover.win = true;
+            // m_gp.m_gameover.m_score = m_gp.score;
             setDefaultValues();
         }
         getVieImage();
@@ -135,9 +139,9 @@ public class Player extends Entity {
 		}
 		
 		if (m_keyH.spacePressed && m_cooldownTir == 0) {
-			tirer(3);
-			m_cooldownTir = m_cadenceTir; 
-		}
+            tirer(m_modeTir);
+            m_cooldownTir = m_cadenceTir; 
+        }
 		
 		for (int i = m_projectiles.size() - 1; i >= 0; i--) {
 			ProjectilePlayer p = m_projectiles.get(i);
@@ -172,13 +176,4 @@ public class Player extends Entity {
             a_g2.drawImage(m_idleImageVie, 10, 10, m_gp.TILE_SIZE * 9, m_gp.TILE_SIZE * 3, null);
         }
     }
-	
-	int getX() {
-		return m_x;
-	}
-
-	int getY() {
-		return m_y;
-	}
-	
 }

@@ -28,35 +28,36 @@ public class GameOver {
     public GameOver(GamePanel gp, KeyHandler a_keyH) {
         this.gp = gp;
         this.m_keyH = a_keyH;
-//        try {
-//            InputStream is = getClass().getResourceAsStream("/font/04B_30__.ttf");
-//            if (is == null) {
-//                throw new IOException("Fichier introuvable !");
-//            }
-//            // createFont ne définit pas la taille, on ajoute deriveFont derrière
-//            pixelFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
-//            is.close(); // Important de fermer le flux après lecture
-//        } catch (FontFormatException | IOException e) {
-//            System.out.println("Erreur chargement police : " + e.getMessage());
-//            // Solution de secours (Fallback) pour que le jeu ne crash pas
-//            pixelFont = new Font("Arial", Font.BOLD, 30);
-//        }
+       try {
+           InputStream is = getClass().getResourceAsStream("/fonts/04B_30__.ttf");
+           if (is == null) {
+               throw new IOException("Fichier introuvable !");
+           }
+           // createFont ne définit pas la taille, on ajoute deriveFont derrière
+           pixelFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
+           is.close(); // Important de fermer le flux après lecture
+       } catch (FontFormatException | IOException e) {
+           System.out.println("Erreur chargement police : " + e.getMessage());
+           // Solution de secours (Fallback) pour que le jeu ne crash pas
+           pixelFont = new Font("Arial", Font.BOLD, 30);
+       }
     }
     
     public void draw(Graphics2D g2) {
         g2.setColor(new Color(0, 0, 0, 150));
         g2.fillRect(0, 0, gp.SCREEN_WIDTH, gp.SCREEN_HEIGHT);
-        //g2.setFont(pixelFont.deriveFont(Font.BOLD, 50F));
-        String text = "MISSION TERMINÉE";
+        g2.setFont(pixelFont.deriveFont(Font.BOLD, 50F));
+        String text = "MISSION TERMINEE";
         g2.setColor(Color.WHITE);
         
         int x = getXforCenteredText(text, g2);
         int y = gp.SCREEN_HEIGHT / 4;
         g2.drawString(text, x, y);
         
+        g2.setFont(pixelFont.deriveFont(Font.BOLD, 30F));
         text = "REJOUER";
         x = getXforCenteredText(text, g2);
-        y += gp.TILE_SIZE * 3;
+        y += gp.TILE_SIZE * 9;
         g2.drawString(text, x, y);
         if (commandNum == 0) {
             g2.drawString(">", x - 40, y);
@@ -64,7 +65,7 @@ public class GameOver {
 
         text = "QUITTER";
         x = getXforCenteredText(text, g2);
-        y += gp.TILE_SIZE * 2;
+        y += gp.TILE_SIZE * 6;
         g2.drawString(text, x, y);
         if (commandNum == 1) {
             g2.drawString(">", x - 40, y);
@@ -73,6 +74,6 @@ public class GameOver {
 
     public int getXforCenteredText(String text, Graphics2D g2) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        return gp.SCREEN_WIDTH / 2 - length / 2;
+        return (gp.SCREEN_WIDTH + 30) / 2 - length / 2;
     }
 } 

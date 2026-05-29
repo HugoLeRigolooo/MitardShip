@@ -1,4 +1,5 @@
 package main;
+import java.util.Random;
 
 import java.awt.Dimension;
 import java.awt.Color;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
 import entity.Ennemy;
 import entity.EnnemyBase;
 import entity.EnnemyKamikaze;
+import entity.EnnemyVertical;
 import entity.EnnemyCircularVertical;
+import entity.EnnemyEight;
 import entity.Player;
 import entity.ProjectileEnnemy;
 import entity.ProjectilePlayer;
@@ -44,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Player m_player;
 	TileManager m_tileM;
 	public Menu m_menu;
-	GameOver m_gameover;
+	public GameOver m_gameover;
 	
 	public int m_position; //position de la caméra
 	public int score; //score du joueur
@@ -56,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int gameOverState = 3;
 	public int m_gameState; // État du jeu
 	public int compteur; //pour bouton menu gameover
+	public ArrayList<Bonus> m_bonusList = new ArrayList<>();
 		
 	/**
 	 * Constructeur
@@ -75,6 +79,9 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(m_keyH);
 		this.setFocusable(true);
+
+		
+		new EnnemyCircularVertical(this, 1, 1, 1, 50, 1, 60);
 	}
 	
 	/**
@@ -147,22 +154,23 @@ public class GamePanel extends JPanel implements Runnable{
 	                
 	              
 	                if (ennemy.getVie() <= 0) {
-	                    Ennemy.listEnnemy.remove(i);
-	                    System.out.println("Ennemi détruit !");
-	                }
+						score += 100;
+						m_bonusList.add(new Bonus(ennemy.getX(), ennemy.getY()));
+						
+						Ennemy.listEnnemy.remove(i);
+					}
 	                
 	                break; // On sort de la boucle des projectiles car cet ennemi a déjà été géré pour cette frame
 	            }
 	        }
+
+			
 	    }
 
 	
-	
-	    int tailleHitbox = TILE_SIZE * 2; 
-	    int offsetX = (TILE_SIZE * 6 - tailleHitbox) / 2; 
-	    int offsetY = (TILE_SIZE * 6 - tailleHitbox) / 2; 
+	    int tailleHitbox = TILE_SIZE * 4; 
 
-	    Rectangle hitboxJoueur = new Rectangle(m_player.getX() + offsetX, m_player.getY() + offsetY, tailleHitbox, tailleHitbox);
+	    Rectangle hitboxJoueur = new Rectangle(m_player.getX(), m_player.getY(), tailleHitbox, tailleHitbox);
 	    
 	   
 	    for (Ennemy ennemy : Ennemy.listEnnemy) {
@@ -174,27 +182,47 @@ public class GamePanel extends JPanel implements Runnable{
 	            ProjectileEnnemy pEnnemy = tirsEnnemi.get(k);
 	            
 	     
-	            Rectangle hitboxProjectileEnnemy = new Rectangle(pEnnemy.getX(), pEnnemy.getY(), TILE_SIZE, TILE_SIZE);
-	            
-	            
-	            if (hitboxJoueur.intersects(hitboxProjectileEnnemy)) {
-	  
-	                m_player.setVie(pEnnemy.getDegat());
-	                tirsEnnemi.remove(k);            
-	                
-	                System.out.println("Joueur touché ! Vie restante : " + m_player.getVie());
-	                
-	                if (m_player.getVie() <= 0) {
-	                	 this.m_gameState = gameOverState;
-	
-	                }
-	            }
+	            Rectangle hitboxRamassage = new Rectangle(m_player.getX(), m_player.getY(), TILE_SIZE * 6, TILE_SIZE * 6);
+
+				for (int i = m_bonusList.size() - 1; i >= 0; i--) {
+					Bonus b = m_bonusList.get(i);
+					Rectangle hitboxBonus = new Rectangle(b.x, b.y, TILE_SIZE * 2, TILE_SIZE * 2);
+					
+					// On utilise la hitboxRamassage ici !
+					if (hitboxRamassage.intersects(hitboxBonus)) { 
+						m_bonusList.remove(i);
+						score += 500; 
+						
+						Random rand = new Random();
+						m_player.m_modeTir = rand.nextInt(3); 
+						
+						System.out.println("Bonus ramassé ! Nouveau tir : " + m_player.m_modeTir);
+					}
+				}
 	        }
 	    }
+
+		for (int i = m_bonusList.size() - 1; i >= 0; i--) {
+			Bonus bonus = m_bonusList.get(i);
+			
+			bonus.y += 2; 
+			
+			if (hitboxJoueur.intersects(new Rectangle(bonus.x, bonus.y, TILE_SIZE * 2, TILE_SIZE * 2))) {
+				m_bonusList.remove(i);
+				score += 500; 
+				
+				Random rand = new Random();
+				m_player.m_modeTir = rand.nextInt(3); 
+				
+				System.out.println("Bonus ramassé ! Nouveau tir : " + m_player.m_modeTir);
+			}
+
+			if (bonus.y > SCREEN_HEIGHT) {
+				m_bonusList.remove(i);
+			}
+		}
 	}
 	
-
-
 	public void drawProgression(Graphics2D g2) {
 		int hauteur=SCREEN_HEIGHT-25;
 		int largeur=10;
@@ -218,10 +246,8 @@ public class GamePanel extends JPanel implements Runnable{
 			for (int i = Ennemy.listEnnemy.size() - 1; i >= 0; i--) {
 				Ennemy.listEnnemy.get(i).update();
 			}
-			
 
 			checkCollisions();
-
 			
 			m_player.update();
 			m_position+=5;
@@ -244,6 +270,11 @@ public class GamePanel extends JPanel implements Runnable{
 				Ennemy.listEnnemy.get(i).draw(g2);
 			}
 
+			for (Bonus ex : m_bonusList) {
+				g2.setColor(Color.YELLOW);
+				g2.fillRect(ex.x, ex.y, TILE_SIZE * 2, TILE_SIZE * 2);
+			}
+
 			drawProgression(g2);
 
 			g2.setColor(Color.WHITE);
@@ -256,5 +287,14 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		g2.dispose();
 	}
+
+	public class Bonus {
+		public int x, y;
+
+		public Bonus(int x, int y) {
+			this.x = x;
+			this.y = y;
+    }
+}
 	
 }
