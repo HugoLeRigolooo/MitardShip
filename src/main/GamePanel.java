@@ -133,6 +133,10 @@ public class GamePanel extends JPanel implements Runnable{
 	
 
 	public void checkCollisions() {
+		 int tailleHitbox = TILE_SIZE * 4; 
+
+
+		 Rectangle hitboxJoueur = new Rectangle(m_player.getX(), m_player.getY(), tailleHitbox, tailleHitbox);
 	    
 		ArrayList<ProjectilePlayer> tirsJoueur = m_player.getProjectiles();
 	    
@@ -141,8 +145,11 @@ public class GamePanel extends JPanel implements Runnable{
 	        Ennemy ennemy = Ennemy.listEnnemy.get(i);
 	        
 	      
-	        Rectangle hitboxEnnemi = new Rectangle(ennemy.getX(), ennemy.getY(), TILE_SIZE, TILE_SIZE);
-	        
+	        Rectangle hitboxEnnemi = new Rectangle(ennemy.getX(), ennemy.getY(), tailleHitbox, tailleHitbox);
+	        if (hitboxEnnemi.intersects(hitboxJoueur)) {
+	        	 this.m_gameState = gameOverState;
+	        	
+	        }
 	        
 	        for (int j = tirsJoueur.size() - 1; j >= 0; j--) {
 	            ProjectilePlayer pPlayer = tirsJoueur.get(j);
@@ -162,18 +169,14 @@ public class GamePanel extends JPanel implements Runnable{
 	                    System.out.println("Ennemi détruit !");
 	                }
 	                
-	                break; // On sort de la boucle des projectiles car cet ennemi a déjà été géré pour cette frame
+	                break; 
 	            }
 	        }
 	    }
 
 	
 	
-	    int tailleHitbox = TILE_SIZE * 2; 
-	    int offsetX = (TILE_SIZE * 6 - tailleHitbox) / 2; 
-	    int offsetY = (TILE_SIZE * 6 - tailleHitbox) / 2; 
-
-	    Rectangle hitboxJoueur = new Rectangle(m_player.getX() + offsetX, m_player.getY() + offsetY, tailleHitbox, tailleHitbox);
+	 
 	    
 	   
 	    for (Ennemy ennemy : Ennemy.listEnnemy) {
@@ -202,6 +205,9 @@ public class GamePanel extends JPanel implements Runnable{
 	            }
 	        }
 	    }
+
+	    
+	    
 	}
 	
 
