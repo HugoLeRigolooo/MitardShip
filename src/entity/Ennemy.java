@@ -48,6 +48,7 @@ public abstract class Ennemy extends Entity {
 		m_speed = 2;
 		this.getEnnemyImage();
 
+
 		m_typeTir = type_tire;
 		m_cadenceTir= cadenceTir;
 		listEnnemy.add(this);
